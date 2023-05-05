@@ -1,0 +1,50 @@
+units:
+  # Keycap
+  kx: 16.5
+  ky: 16.5
+  # Padded keycap
+  px: kx + 1.4
+  py: ky + 1.4
+points:
+  zones:
+    matrix:
+      key:
+        padding: 1ky
+        spread: 1kx
+      columns:
+        outer:
+        pinky:
+          key:
+            splay: 0
+        ring:
+          key:
+            stagger: 0.7ky
+        middle:
+          key:
+            stagger: 0.5ky
+        index:
+          key:
+            stagger: -0.2ky
+        inner:
+      rows:
+        bottom:
+        home:
+        top:
+    thumbs:
+      key:
+        padding: 1ky
+        spread: 1kx
+      anchor:
+        ref: matrix_middle_bottom
+        shift: [1kx, -1.2ky]
+      columns:
+        alpha:
+        beta:
+        gamma:
+      rows:
+        cluster:
+
+  rotate: -15
+  mirror: &mirror
+    ref: thumbs_gamma_cluster
+    distance: 2.5kx
