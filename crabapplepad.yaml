@@ -1,10 +1,15 @@
 units:
   # Keycap
-  kx: 16.5
-  ky: 16.5
+  krx: 16.5
+  kry: 16.5
+  p: 1.4
+  # Keycap
+  kx: krx + p
+  ky: kry + p
   # Padded keycap
-  px: kx + 1.4
-  py: ky + 1.4
+  px: kx + p
+  py: ky + p
+  mr: 6.1
 points:
   zones:
     matrix:
@@ -44,7 +49,170 @@ points:
       rows:
         cluster:
 
-  rotate: -15
+  rotate: -0
   mirror: &mirror
     ref: thumbs_gamma_cluster
-    distance: 2.5kx
+    distance: 1.5kx
+outlines:
+  _keys:
+    - what: rectangle
+      where: true
+      size: [krx, kry]
+  _magnets:
+    - what: circle
+      radius: mr
+      where:
+        ref: thumbs_gamma_cluster
+        shift: [0kx, 1.2ky]
+    - what: circle
+      radius: 1.6
+      where:
+        ref: thumbs_gamma_cluster
+        shift: [0.25kx, 0.95ky]
+    - what: circle
+      radius: 1.6
+      where:
+        ref: thumbs_gamma_cluster
+        shift: [-0.25kx, 0.95ky]
+    - what: circle
+      radius: 1.6
+      where:
+        ref: thumbs_gamma_cluster
+        shift: [0.25kx, 1.45ky]
+    - what: circle
+      radius: 1.6
+      where:
+        ref: thumbs_gamma_cluster
+        shift: [-0.25kx, 1.45ky]
+
+    - what: circle
+      radius: mr
+      where:
+        ref: thumbs_gamma_cluster
+        shift: [0kx, 2.8ky]
+    - what: circle
+      radius: 1.6
+      where:
+        ref: thumbs_gamma_cluster
+        shift: [0.25kx, 2.55ky]
+    - what: circle
+      radius: 1.6
+      where:
+        ref: thumbs_gamma_cluster
+        shift: [-0.25kx, 2.55ky]
+    - what: circle
+      radius: 1.6
+      where:
+        ref: thumbs_gamma_cluster
+        shift: [0.25kx, 3.05ky]
+    - what: circle
+      radius: 1.6
+      where:
+        ref: thumbs_gamma_cluster
+        shift: [-0.25kx, 3.05ky]
+
+  _magnets_mirror:
+    - what: circle
+      radius: mr
+      where:
+        ref: mirror_thumbs_gamma_cluster
+        shift: [0kx, 1.2ky]
+    - what: circle
+      radius: 1.6
+      where:
+        ref: mirror_thumbs_gamma_cluster
+        shift: [0.25kx, 0.95ky]
+    - what: circle
+      radius: 1.6
+      where:
+        ref: mirror_thumbs_gamma_cluster
+        shift: [-0.25kx, 0.95ky]
+    - what: circle
+      radius: 1.6
+      where:
+        ref: mirror_thumbs_gamma_cluster
+        shift: [0.25kx, 1.45ky]
+    - what: circle
+      radius: 1.6
+      where:
+        ref: mirror_thumbs_gamma_cluster
+        shift: [-0.25kx, 1.45ky]
+
+    - what: circle
+      radius: mr
+      where:
+        ref: mirror_thumbs_gamma_cluster
+        shift: [0kx, 2.8ky]
+    - what: circle
+      radius: 1.6
+      where:
+        ref: mirror_thumbs_gamma_cluster
+        shift: [0.25kx, 2.55ky]
+    - what: circle
+      radius: 1.6
+      where:
+        ref: mirror_thumbs_gamma_cluster
+        shift: [-0.25kx, 2.55ky]
+    - what: circle
+      radius: 1.6
+      where:
+        ref: mirror_thumbs_gamma_cluster
+        shift: [0.25kx, 3.05ky]
+    - what: circle
+      radius: 1.6
+      where:
+        ref: mirror_thumbs_gamma_cluster
+        shift: [-0.25kx, 3.05ky]
+  _main:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: matrix_outer_top
+          shift: [-0.5kx-p, 1.7ky+2p]
+        - ref: matrix_index_top
+          shift: [-0.5kx+p, 0.7ky+2p]
+        - ref: matrix_index_top
+          shift: [-0.5kx+p, 0.5ky+p]
+        - ref: matrix_inner_top
+          shift: [1.25kx+p, 0.5ky+p]
+        - ref: matrix_inner_top
+          shift: [1.25kx+p, 0.7ky+2p]
+        - ref: matrix_inner_top
+          shift: [1.5kx+p, 0.7ky+2p]
+        - ref: thumbs_gamma_cluster
+          shift: [0.5kx+p, -0.5ky-2p]
+        - ref: matrix_outer_bottom
+          shift: [-0.5kx-p, -0.5ky-2p]
+      fillet: p
+  _main_mirror:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: mirror_matrix_outer_top
+          shift: [-0.5kx-p, 1.7ky+2p]
+        - ref: mirror_matrix_index_top
+          shift: [-0.5kx+p, 0.7ky+2p]
+        - ref: mirror_matrix_index_top
+          shift: [-0.5kx+p, 0.5ky+p]
+        - ref: mirror_matrix_inner_top
+          shift: [1.25kx+p, 0.5ky+p]
+        - ref: mirror_matrix_inner_top
+          shift: [1.25kx+p, 0.7ky+2p]
+        - ref: mirror_matrix_inner_top
+          shift: [1.5kx+p, .7ky+2p]
+        - ref: mirror_thumbs_gamma_cluster
+          shift: [0.5kx+p, -0.5ky-2p]
+        - ref: mirror_matrix_outer_bottom
+          shift: [-0.5kx-p, -0.5ky-2p]
+      fillet: p
+  board:
+    - name: _main
+    - operation: subtract
+      name: _magnets
+    - name: _main_mirror
+    - operation: subtract
+      name: _magnets_mirror
+  combo:
+    - name: board
+    - operation: subtract
+      name: _keys
