@@ -2,7 +2,7 @@ units:
   # Keycap
   krx: 16.5
   kry: 16.5
-  p: 1.4
+  p: 1.6
   # Keycap
   kx: krx + p
   ky: kry + p
@@ -10,6 +10,7 @@ units:
   px: kx + p
   py: ky + p
   mr: 6.1
+  sr: 1.6
 points:
   zones:
     matrix:
@@ -58,6 +59,41 @@ outlines:
     - what: rectangle
       where: true
       size: [krx, kry]
+
+  _mount_holes:
+    - what: circle
+      radius: sr
+      where:
+        ref: thumbs_gamma_cluster
+        shift: [0kx, 2ky]
+    - what: circle
+      radius: sr
+      where:
+        ref: matrix_pinky_top
+        shift: [0.35kx, 0.65ky]
+    - what: circle
+      radius: sr
+      where:
+        ref: matrix_middle_bottom
+        shift: [0kx, -0.75ky]
+
+  _mount_holes_mirror:
+    - what: circle
+      radius: sr
+      where:
+        ref: mirror_thumbs_gamma_cluster
+        shift: [0kx, 2ky]
+    - what: circle
+      radius: sr
+      where:
+        ref: mirror_matrix_pinky_top
+        shift: [0.35kx, 0.65ky]
+    - what: circle
+      radius: sr
+      where:
+        ref: mirror_matrix_middle_bottom
+        shift: [0kx, -0.75ky]
+
   _magnets:
     - what: circle
       radius: mr
@@ -65,22 +101,22 @@ outlines:
         ref: thumbs_gamma_cluster
         shift: [0kx, 1.2ky]
     - what: circle
-      radius: 1.6
+      radius: sr
       where:
         ref: thumbs_gamma_cluster
         shift: [0.25kx, 0.95ky]
     - what: circle
-      radius: 1.6
+      radius: sr
       where:
         ref: thumbs_gamma_cluster
         shift: [-0.25kx, 0.95ky]
     - what: circle
-      radius: 1.6
+      radius: sr
       where:
         ref: thumbs_gamma_cluster
         shift: [0.25kx, 1.45ky]
     - what: circle
-      radius: 1.6
+      radius: sr
       where:
         ref: thumbs_gamma_cluster
         shift: [-0.25kx, 1.45ky]
@@ -91,22 +127,22 @@ outlines:
         ref: thumbs_gamma_cluster
         shift: [0kx, 2.8ky]
     - what: circle
-      radius: 1.6
+      radius: sr
       where:
         ref: thumbs_gamma_cluster
         shift: [0.25kx, 2.55ky]
     - what: circle
-      radius: 1.6
+      radius: sr
       where:
         ref: thumbs_gamma_cluster
         shift: [-0.25kx, 2.55ky]
     - what: circle
-      radius: 1.6
+      radius: sr
       where:
         ref: thumbs_gamma_cluster
         shift: [0.25kx, 3.05ky]
     - what: circle
-      radius: 1.6
+      radius: sr
       where:
         ref: thumbs_gamma_cluster
         shift: [-0.25kx, 3.05ky]
@@ -118,22 +154,22 @@ outlines:
         ref: mirror_thumbs_gamma_cluster
         shift: [0kx, 1.2ky]
     - what: circle
-      radius: 1.6
+      radius: sr
       where:
         ref: mirror_thumbs_gamma_cluster
         shift: [0.25kx, 0.95ky]
     - what: circle
-      radius: 1.6
+      radius: sr
       where:
         ref: mirror_thumbs_gamma_cluster
         shift: [-0.25kx, 0.95ky]
     - what: circle
-      radius: 1.6
+      radius: sr
       where:
         ref: mirror_thumbs_gamma_cluster
         shift: [0.25kx, 1.45ky]
     - what: circle
-      radius: 1.6
+      radius: sr
       where:
         ref: mirror_thumbs_gamma_cluster
         shift: [-0.25kx, 1.45ky]
@@ -144,22 +180,22 @@ outlines:
         ref: mirror_thumbs_gamma_cluster
         shift: [0kx, 2.8ky]
     - what: circle
-      radius: 1.6
+      radius: sr
       where:
         ref: mirror_thumbs_gamma_cluster
         shift: [0.25kx, 2.55ky]
     - what: circle
-      radius: 1.6
+      radius: sr
       where:
         ref: mirror_thumbs_gamma_cluster
         shift: [-0.25kx, 2.55ky]
     - what: circle
-      radius: 1.6
+      radius: sr
       where:
         ref: mirror_thumbs_gamma_cluster
         shift: [0.25kx, 3.05ky]
     - what: circle
-      radius: 1.6
+      radius: sr
       where:
         ref: mirror_thumbs_gamma_cluster
         shift: [-0.25kx, 3.05ky]
@@ -209,10 +245,36 @@ outlines:
     - name: _main
     - operation: subtract
       name: _magnets
+    - operation: subtract
+      name: _mount_holes
+
     - name: _main_mirror
     - operation: subtract
       name: _magnets_mirror
+    - operation: subtract
+      name: _mount_holes_mirror
   combo:
     - name: board
     - operation: subtract
       name: _keys
+pcbs:
+  kbd:
+    outlines:
+      main:
+        outline: board
+    footprints:
+      keys:
+        what: button
+        where: true
+        params:
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+      # Through Hole or SMD Diodes
+      diode:
+        what: diode
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0, -5]
