@@ -264,12 +264,11 @@ pcbs:
         outline: board
     footprints:
       keys:
-        what: button
+        what: kailh_x
         where: true
         params:
           from: "{{column_net}}"
           to: "{{colrow}}"
-      # Through Hole or SMD Diodes
       diode:
         what: diode
         where: true
