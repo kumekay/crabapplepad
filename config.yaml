@@ -2,13 +2,11 @@ units:
   # Keycap
   krx: 16.5
   kry: 16.5
-  p: 1.6
+  p: 2.5
+  po: 1.6
   # Keycap
   kx: krx + p
   ky: kry + p
-  # Padded keycap
-  px: kx + p
-  py: ky + p
   mr: 6.1
   sr: 1.6
 points:
@@ -204,43 +202,43 @@ outlines:
       operation: stack
       points:
         - ref: matrix_outer_top
-          shift: [-0.5kx-p, 1.7ky+2p]
+          shift: [-0.5kx-po, 1.7ky+2po]
         - ref: matrix_index_top
-          shift: [-0.5kx+p, 0.7ky+2p]
+          shift: [-0.5kx+po, 0.7ky+2po]
         - ref: matrix_index_top
-          shift: [-0.5kx+p, 0.5ky+p]
+          shift: [-0.5kx+po, 0.5ky+po]
         - ref: matrix_inner_top
-          shift: [1.25kx+p, 0.5ky+p]
+          shift: [1.25kx+po, 0.5ky+po]
         - ref: matrix_inner_top
-          shift: [1.25kx+p, 0.7ky+2p]
+          shift: [1.25kx+po, 0.7ky+2po]
         - ref: matrix_inner_top
-          shift: [1.5kx+p, 0.7ky+2p]
+          shift: [1.5kx+po, 0.7ky+2po]
         - ref: thumbs_gamma_cluster
-          shift: [0.5kx+p, -0.5ky-2p]
+          shift: [0.5kx+po, -0.5ky-2po]
         - ref: matrix_outer_bottom
-          shift: [-0.5kx-p, -0.5ky-2p]
-      fillet: p
+          shift: [-0.5kx-po, -0.5ky-2po]
+      fillet: sr
   _main_mirror:
     - what: polygon
       operation: stack
       points:
         - ref: mirror_matrix_outer_top
-          shift: [-0.5kx-p, 1.7ky+2p]
+          shift: [-0.5kx-po, 1.7ky+2po]
         - ref: mirror_matrix_index_top
-          shift: [-0.5kx+p, 0.7ky+2p]
+          shift: [-0.5kx+po, 0.7ky+2po]
         - ref: mirror_matrix_index_top
-          shift: [-0.5kx+p, 0.5ky+p]
+          shift: [-0.5kx+po, 0.5ky+po]
         - ref: mirror_matrix_inner_top
-          shift: [1.25kx+p, 0.5ky+p]
+          shift: [1.25kx+po, 0.5ky+po]
         - ref: mirror_matrix_inner_top
-          shift: [1.25kx+p, 0.7ky+2p]
+          shift: [1.25kx+po, 0.7ky+2po]
         - ref: mirror_matrix_inner_top
-          shift: [1.5kx+p, .7ky+2p]
+          shift: [1.5kx+po, .7ky+2po]
         - ref: mirror_thumbs_gamma_cluster
-          shift: [0.5kx+p, -0.5ky-2p]
+          shift: [0.5kx+po, -0.5ky-2po]
         - ref: mirror_matrix_outer_bottom
-          shift: [-0.5kx-p, -0.5ky-2p]
-      fillet: p
+          shift: [-0.5kx-po, -0.5ky-2po]
+      fillet: sr
   board:
     - name: _main
     - operation: subtract
@@ -270,10 +268,17 @@ pcbs:
           from: "{{column_net}}"
           to: "{{colrow}}"
       diode:
-        what: diode
+        what: diode_sod323
         where: true
         params:
           from: "{{colrow}}"
           to: "{{row_net}}"
         adjust:
-          shift: [0, -5]
+          shift: [-7, -2]
+          rotate: -90
+      mcu:
+        what: xiao_nrf52840
+        where:
+          ref: matrix_outer_top
+          shift: [kx, ky]
+          rotate: 90
