@@ -35255,8 +35255,6 @@ module.exports = {
         (pad 3 smd oval (at 0.83312 -13.03782 ${p.rot}) (size 2.74828 1.99898) (layers F.Cu F.Paste F.Mask) ${p.P2.str})
         (pad 2 smd oval (at 0.83312 -15.57782 ${p.rot}) (size 2.74828 1.99898) (layers F.Cu F.Paste F.Mask) ${p.P1.str})
         (pad 1 smd oval (at 0.83312 -18.11782 ${p.rot}) (size 2.74828 1.99898) (layers F.Cu F.Paste F.Mask) ${p.P0.str})
-        (pad 15 smd oval (at 7.7 -1.8  ${p.rot + 90}) (size 2.032 1.016) (layers F.Cu F.Paste F.Mask))
-        (pad 16 smd oval (at 10.25 -1.8  ${p.rot + 90}) (size 2.032 1.016) (layers F.Cu F.Paste F.Mask))
         (pad 17 smd circle (at 7.698803 -18.804187 ${p.rot}) (size 1.143 1.143) (layers F.Cu F.Paste F.Mask))
         (pad 18 smd circle (at 10.238803 -18.804187 ${p.rot}) (size 1.143 1.143) (layers F.Cu F.Paste F.Mask))
         (pad 19 smd circle (at 7.698803 -16.264187 ${p.rot}) (size 1.143 1.143) (layers F.Cu F.Paste F.Mask))

@@ -2,7 +2,7 @@ units:
   # Keycap
   krx: 16.5
   kry: 16.5
-  p: 2.5
+  p: 1.27
   po: 1.6
   # Keycap
   kx: krx + p
@@ -68,7 +68,7 @@ outlines:
       radius: sr
       where:
         ref: matrix_pinky_top
-        shift: [0.35kx, 0.65ky]
+        shift: [0kx, 1.25ky]
     - what: circle
       radius: sr
       where:
@@ -91,6 +91,20 @@ outlines:
       where:
         ref: mirror_matrix_middle_bottom
         shift: [0kx, -0.75ky]
+
+  _battery_cutout:
+    - what: rectangle
+      where:
+        ref: matrix_outer_top
+        shift: [-1.1, 1.3ky-1]
+      size: [5.08, 12.7]
+
+  _battery_cutout_mirror:
+    - what: rectangle
+      where:
+        ref: mirror_matrix_outer_top
+        shift: [-1.1, 1.3ky-1]
+      size: [5.08, 12.7]
 
   _magnets:
     - what: circle
@@ -244,11 +258,15 @@ outlines:
     - operation: subtract
       name: _magnets
     - operation: subtract
+      name: _battery_cutout
+    - operation: subtract
       name: _mount_holes
 
     - name: _main_mirror
     - operation: subtract
       name: _magnets_mirror
+    - operation: subtract
+      name: _battery_cutout_mirror
     - operation: subtract
       name: _mount_holes_mirror
   combo:
@@ -274,11 +292,46 @@ pcbs:
           from: "{{colrow}}"
           to: "{{row_net}}"
         adjust:
-          shift: [-7, -2]
-          rotate: -90
+          shift: [0, 6]
+          rotate: 180
+      power_gnd:
+        what: thru_hole_pad
+        params:
+          net: GND
+        where:
+          ref: thumbs_gamma_cluster
+          shift: [0.5kx+p-3, 2ky+1.4]
+      power_vcc_mirror:
+        what: thru_hole_pad
+        params:
+          net: VCC
+        where:
+          ref: mirror_thumbs_gamma_cluster
+          shift: [0.5kx+p-3, 2ky-1.4]
+      power_gnd_mirror:
+        what: thru_hole_pad
+        params:
+          net: GND
+        where:
+          ref: mirror_thumbs_gamma_cluster
+          shift: [0.5kx+p-3, 2ky+1.4]
+      power_vcc:
+        what: thru_hole_pad
+        params:
+          net: VCC
+        where:
+          ref: thumbs_gamma_cluster
+          shift: [0.5kx+p-3, 2ky-1.4]
+
       mcu:
         what: xiao_nrf52840
         where:
           ref: matrix_outer_top
-          shift: [kx, ky]
+          shift: [0.6kx, 0.8ky-1]
+          rotate: 90
+      mcu_mirror:
+        what: xiao_nrf52840
+        where:
+          ref: mirror_matrix_outer_top
+          shift: [0.6kx, 0.8ky-1+17.78]
           rotate: 90
