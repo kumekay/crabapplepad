@@ -35241,6 +35241,8 @@ module.exports = {
 
         ${outlines}
 
+        (pad "" np_thru_hole oval (at 4.8 -11.76782 ${p.rot}) (size 4.1 5.1) (drill oval 4.1 5.1) (layers "*.Cu" "*.Mask"))
+
         (pad 14 smd oval (at 16.99768 -18.11782 ${p.rot}) (size 2.74828 1.99898) (layers F.Cu F.Paste F.Mask) ${p.RAW.str})
         (pad 13 smd oval (at 16.99768 -15.57782 ${p.rot}) (size 2.74828 1.99898) (layers F.Cu F.Paste F.Mask) ${p.GND.str})
         (pad 12 smd oval (at 16.99768 -13.03782 ${p.rot}) (size 2.74828 1.99898) (layers F.Cu F.Paste F.Mask) ${p.VCC.str})

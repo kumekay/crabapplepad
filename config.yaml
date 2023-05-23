@@ -17,23 +17,43 @@ points:
         spread: 1kx
       columns:
         outer:
+          key:
+            column_net: P0
+            mirror.column_net: P0_mirror
         pinky:
           key:
             splay: 0
+            column_net: P1
+            mirror.column_net: P1_mirror
         ring:
           key:
             stagger: 0.7ky
+            column_net: P2
+            mirror.column_net: P2_mirror
         middle:
           key:
             stagger: 0.5ky
+            column_net: P3
+            mirror.column_net: P3_mirror
         index:
           key:
             stagger: -0.2ky
+            column_net: P4
+            mirror.column_net: P4_mirror
         inner:
+          key:
+            column_net: P5
+            mirror.column_net: P5_mirror
       rows:
         bottom:
+          row_net: P9
+          mirror.row_net: P9_mirror
         home:
+          row_net: P8
+          mirror.row_net: P8_mirror
         top:
+          row_net: P7
+          mirror.row_net: P7_mirror
     thumbs:
       key:
         padding: 1ky
@@ -43,10 +63,21 @@ points:
         shift: [1kx, -1.2ky]
       columns:
         alpha:
+          key:
+            column_net: P3
+            mirror.column_net: P3_mirror
         beta:
+          key:
+            column_net: P4
+            mirror.column_net: P4_mirror
         gamma:
+          key:
+            column_net: P5
+            mirror.column_net: P5_mirror
       rows:
         cluster:
+          row_net: P6
+          mirror.row_net: P6_mirror
 
   rotate: -0
   mirror: &mirror
@@ -85,26 +116,12 @@ outlines:
       radius: sr
       where:
         ref: mirror_matrix_pinky_top
-        shift: [0.35kx, 0.65ky]
+        shift: [0kx, 1.25ky]
     - what: circle
       radius: sr
       where:
         ref: mirror_matrix_middle_bottom
         shift: [0kx, -0.75ky]
-
-  _battery_cutout:
-    - what: rectangle
-      where:
-        ref: matrix_outer_top
-        shift: [-1.1, 1.3ky-1]
-      size: [5.08, 12.7]
-
-  _battery_cutout_mirror:
-    - what: rectangle
-      where:
-        ref: mirror_matrix_outer_top
-        shift: [-1.1, 1.3ky-1]
-      size: [5.08, 12.7]
 
   _magnets:
     - what: circle
@@ -258,15 +275,11 @@ outlines:
     - operation: subtract
       name: _magnets
     - operation: subtract
-      name: _battery_cutout
-    - operation: subtract
       name: _mount_holes
 
     - name: _main_mirror
     - operation: subtract
       name: _magnets_mirror
-    - operation: subtract
-      name: _battery_cutout_mirror
     - operation: subtract
       name: _mount_holes_mirror
   combo:
@@ -294,6 +307,52 @@ pcbs:
         adjust:
           shift: [0, 6]
           rotate: 180
+
+      battery_power_mcu:
+        what: thru_hole_pad
+        params:
+          net: BAT_VCC
+        where:
+          ref: matrix_pinky_top
+          shift: [-0.2kx, 0.8ky]
+      battery_power_mcu_mirror:
+        what: thru_hole_pad
+        params:
+          net: BAT_VCC_MIRROR
+        where:
+          ref: mirror_matrix_pinky_top
+          shift: [-0.2kx, 0.8ky]
+
+      battery_power:
+        what: thru_hole_pad
+        params:
+          net: BAT_VCC
+        where:
+          ref: matrix_middle_bottom 
+          shift: [-0.3kx, -1.4-0.9ky]  
+      battery_power_mirror:
+        what: thru_hole_pad
+        params:
+          net: BAT_VCC_MIRROR
+        where:
+          ref: mirror_matrix_middle_bottom 
+          shift: [-0.3kx, -1.4-0.9ky]  
+
+      battery_power_gnd:
+        what: thru_hole_pad
+        params:
+          net: GND
+        where:
+          ref: matrix_middle_bottom 
+          shift: [-0.3kx, 1.4-0.9ky]  
+      battery_power_gnd_mirror:
+        what: thru_hole_pad
+        params:
+          net: GND
+        where:
+          ref: mirror_matrix_middle_bottom
+          shift: [-0.3kx, 1.4-0.9ky]  
+
       power_gnd:
         what: thru_hole_pad
         params:
@@ -301,13 +360,6 @@ pcbs:
         where:
           ref: thumbs_gamma_cluster
           shift: [0.5kx+p-3, 2ky+1.4]
-      power_vcc_mirror:
-        what: thru_hole_pad
-        params:
-          net: VCC
-        where:
-          ref: mirror_thumbs_gamma_cluster
-          shift: [0.5kx+p-3, 2ky-1.4]
       power_gnd_mirror:
         what: thru_hole_pad
         params:
@@ -315,12 +367,20 @@ pcbs:
         where:
           ref: mirror_thumbs_gamma_cluster
           shift: [0.5kx+p-3, 2ky+1.4]
+
       power_vcc:
         what: thru_hole_pad
         params:
           net: VCC
         where:
           ref: thumbs_gamma_cluster
+          shift: [0.5kx+p-3, 2ky-1.4]
+      power_vcc_mirror:
+        what: thru_hole_pad
+        params:
+          net: VCC
+        where:
+          ref: mirror_thumbs_gamma_cluster
           shift: [0.5kx+p-3, 2ky-1.4]
 
       mcu:
@@ -331,6 +391,18 @@ pcbs:
           rotate: 90
       mcu_mirror:
         what: xiao_nrf52840
+        params:
+          P0: P0_mirror
+          P1: P1_mirror
+          P2: P2_mirror
+          P3: P3_mirror
+          P4: P4_mirror
+          P5: P5_mirror
+          P6: P6_mirror
+          P7: P7_mirror
+          P8: P8_mirror
+          P9: P9_mirror
+          P10: P10_mirror
         where:
           ref: mirror_matrix_outer_top
           shift: [0.6kx, 0.8ky-1+17.78]
