@@ -12,6 +12,8 @@ units:
 points:
   zones:
     matrix:
+      anchor:
+        shift: [100, -100]
       key:
         padding: 1ky
         spread: 1kx
@@ -88,41 +90,6 @@ outlines:
     - what: rectangle
       where: true
       size: [krx, kry]
-
-  _mount_holes:
-    - what: circle
-      radius: sr
-      where:
-        ref: thumbs_gamma_cluster
-        shift: [0kx, 2ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: matrix_pinky_top
-        shift: [0kx, 1.25ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: matrix_middle_bottom
-        shift: [0kx, -0.75ky]
-
-  _mount_holes_mirror:
-    - what: circle
-      radius: sr
-      where:
-        ref: mirror_thumbs_gamma_cluster
-        shift: [0kx, 2ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: mirror_matrix_pinky_top
-        shift: [0kx, 1.25ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: mirror_matrix_middle_bottom
-        shift: [0kx, -0.75ky]
-
   _magnets:
     - what: circle
       radius: mr
@@ -274,14 +241,10 @@ outlines:
     - name: _main
     - operation: subtract
       name: _magnets
-    - operation: subtract
-      name: _mount_holes
 
     - name: _main_mirror
     - operation: subtract
       name: _magnets_mirror
-    - operation: subtract
-      name: _mount_holes_mirror
   combo:
     - name: board
     - operation: subtract
@@ -328,30 +291,30 @@ pcbs:
         params:
           net: BAT_VCC
         where:
-          ref: matrix_middle_bottom 
-          shift: [-0.3kx, -1.4-0.9ky]  
+          ref: matrix_middle_bottom
+          shift: [-0.3kx, -1.4-0.9ky]
       battery_power_mirror:
         what: thru_hole_pad
         params:
           net: BAT_VCC_MIRROR
         where:
-          ref: mirror_matrix_middle_bottom 
-          shift: [-0.3kx, -1.4-0.9ky]  
+          ref: mirror_matrix_middle_bottom
+          shift: [-0.3kx, -1.4-0.9ky]
 
       battery_power_gnd:
         what: thru_hole_pad
         params:
           net: GND
         where:
-          ref: matrix_middle_bottom 
-          shift: [-0.3kx, 1.4-0.9ky]  
+          ref: matrix_middle_bottom
+          shift: [-0.3kx, 1.4-0.9ky]
       battery_power_gnd_mirror:
         what: thru_hole_pad
         params:
           net: GND_mirror
         where:
           ref: mirror_matrix_middle_bottom
-          shift: [-0.3kx, 1.4-0.9ky]  
+          shift: [-0.3kx, 1.4-0.9ky]
 
       power_gnd:
         what: thru_hole_pad
@@ -410,3 +373,51 @@ pcbs:
           ref: mirror_matrix_outer_top
           shift: [0.6kx, 0.8ky-1+17.78]
           rotate: 90
+
+      mount_hole_thumb:
+        what: mounthole
+        params:
+          diameter: 3.2
+        where:
+          ref: thumbs_gamma_cluster
+          shift: [0kx, 2ky]
+
+      mount_hole_pinky:
+        what: mounthole
+        params:
+          diameter: 3.2
+        where:
+          ref: matrix_pinky_top
+          shift: [0kx, 1.25ky]
+
+      mount_hole_middle:
+        what: mounthole
+        params:
+          diameter: 3.2
+        where:
+          ref: matrix_middle_bottom
+          shift: [0.2kx, -0.75ky]
+
+      mount_hole_thumb_mirror:
+        what: mounthole
+        params:
+          diameter: 3.2
+        where:
+          ref: mirror_thumbs_gamma_cluster
+          shift: [0kx, 2ky]
+
+      mount_hole_pinky_mirror:
+        what: mounthole
+        params:
+          diameter: 3.2
+        where:
+          ref: mirror_matrix_pinky_top
+          shift: [0kx, 1.25ky]
+
+      mount_hole_middle_mirror:
+        what: mounthole
+        params:
+          diameter: 3.2
+        where:
+          ref: mirror_matrix_middle_bottom
+          shift: [0.2kx, -0.75ky]
