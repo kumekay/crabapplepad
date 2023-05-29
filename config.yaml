@@ -62,7 +62,7 @@ points:
         spread: 1kx
       anchor:
         ref: matrix_middle_bottom
-        shift: [1kx, -1.2ky]
+        shift: [1.2kx, -1.2ky]
       columns:
         alpha:
           key:
@@ -84,117 +84,13 @@ points:
   rotate: -0
   mirror: &mirror
     ref: thumbs_gamma_cluster
-    distance: 1kx+2p+2
+    distance: 3kx+2p+2
 outlines:
   _keys:
     - what: rectangle
       where: true
       size: [krx, kry]
-  _magnets:
-    - what: circle
-      radius: mr
-      where:
-        ref: thumbs_gamma_cluster
-        shift: [0kx, 1.2ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: thumbs_gamma_cluster
-        shift: [0.25kx, 0.95ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: thumbs_gamma_cluster
-        shift: [-0.25kx, 0.95ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: thumbs_gamma_cluster
-        shift: [0.25kx, 1.45ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: thumbs_gamma_cluster
-        shift: [-0.25kx, 1.45ky]
 
-    - what: circle
-      radius: mr
-      where:
-        ref: thumbs_gamma_cluster
-        shift: [0kx, 2.8ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: thumbs_gamma_cluster
-        shift: [0.25kx, 2.55ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: thumbs_gamma_cluster
-        shift: [-0.25kx, 2.55ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: thumbs_gamma_cluster
-        shift: [0.25kx, 3.05ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: thumbs_gamma_cluster
-        shift: [-0.25kx, 3.05ky]
-
-  _magnets_mirror:
-    - what: circle
-      radius: mr
-      where:
-        ref: mirror_thumbs_gamma_cluster
-        shift: [0kx, 1.2ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: mirror_thumbs_gamma_cluster
-        shift: [0.25kx, 0.95ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: mirror_thumbs_gamma_cluster
-        shift: [-0.25kx, 0.95ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: mirror_thumbs_gamma_cluster
-        shift: [0.25kx, 1.45ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: mirror_thumbs_gamma_cluster
-        shift: [-0.25kx, 1.45ky]
-
-    - what: circle
-      radius: mr
-      where:
-        ref: mirror_thumbs_gamma_cluster
-        shift: [0kx, 2.8ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: mirror_thumbs_gamma_cluster
-        shift: [0.25kx, 2.55ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: mirror_thumbs_gamma_cluster
-        shift: [-0.25kx, 2.55ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: mirror_thumbs_gamma_cluster
-        shift: [0.25kx, 3.05ky]
-    - what: circle
-      radius: sr
-      where:
-        ref: mirror_thumbs_gamma_cluster
-        shift: [-0.25kx, 3.05ky]
   _main:
     - what: polygon
       operation: stack
@@ -211,8 +107,14 @@ outlines:
           shift: [1.25kx+po, 0.7ky+2po]
         - ref: matrix_inner_top
           shift: [1.5kx+po, 0.7ky+2po]
+        # magnet top
+        - ref: matrix_inner_home
+          shift: [2kx, 15]
+        # magnet bottom
+        - ref: matrix_inner_home
+          shift: [2kx + 10, -15]
         - ref: thumbs_gamma_cluster
-          shift: [0.5kx+po, -0.5ky-2po]
+          shift: [0.8kx + 10, -0.5ky-2po]
         - ref: matrix_outer_bottom
           shift: [-0.5kx-po, -0.5ky-2po]
       fillet: sr
@@ -232,19 +134,20 @@ outlines:
           shift: [1.25kx+po, 0.7ky+2po]
         - ref: mirror_matrix_inner_top
           shift: [1.5kx+po, .7ky+2po]
+        # magnet top
+        - ref: mirror_matrix_inner_home
+          shift: [2kx, 15]
+        # magnet bottom
+        - ref: mirror_matrix_inner_home
+          shift: [2kx + 10, -15]
         - ref: mirror_thumbs_gamma_cluster
-          shift: [0.5kx+po, -0.5ky-2po]
+          shift: [0.8kx + 10, -0.5ky-2po]
         - ref: mirror_matrix_outer_bottom
           shift: [-0.5kx-po, -0.5ky-2po]
       fillet: sr
   board:
     - name: _main
-    - operation: subtract
-      name: _magnets
-
     - name: _main_mirror
-    - operation: subtract
-      name: _magnets_mirror
   combo:
     - name: board
     - operation: subtract
@@ -322,14 +225,14 @@ pcbs:
           net: GND
         where:
           ref: thumbs_gamma_cluster
-          shift: [0.5kx+p-3, 2ky-1.4]
+          shift: [0.8kx + 10 - 2, -1.4]
       power_gnd_mirror:
         what: thru_hole_pad
         params:
           net: GND_mirror
         where:
           ref: mirror_thumbs_gamma_cluster
-          shift: [0.5kx+p-3, 2ky-1.4]
+          shift: [0.8kx + 10 - 2, -1.4]
 
       power_vcc:
         what: thru_hole_pad
@@ -337,14 +240,15 @@ pcbs:
           net: RAW
         where:
           ref: thumbs_gamma_cluster
-          shift: [0.5kx+p-3, 2ky+1.4]
+          shift: [0.8kx + 10 - 2, 1.4]
+
       power_vcc_mirror:
         what: thru_hole_pad
         params:
           net: RAW_mirror
         where:
           ref: mirror_thumbs_gamma_cluster
-          shift: [0.5kx+p-3, 2ky+1.4]
+          shift: [0.8kx + 10 - 2, 1.4]
 
       mcu:
         what: xiao_nrf52840
@@ -379,8 +283,8 @@ pcbs:
         params:
           diameter: 3.2
         where:
-          ref: thumbs_gamma_cluster
-          shift: [0kx, 2ky]
+          ref: matrix_inner_home
+          shift: [1.4kx + 5, 0]
 
       mount_hole_pinky:
         what: mounthole
@@ -403,8 +307,8 @@ pcbs:
         params:
           diameter: 3.2
         where:
-          ref: mirror_thumbs_gamma_cluster
-          shift: [0kx, 2ky]
+          ref: mirror_matrix_inner_home
+          shift: [1.4kx + 5, 0]
 
       mount_hole_pinky_mirror:
         what: mounthole
@@ -421,3 +325,27 @@ pcbs:
         where:
           ref: mirror_matrix_middle_bottom
           shift: [0.2kx, -0.75ky]
+
+      magnet_bottom:
+        what: magnet_hole
+        where:
+          ref: matrix_inner_home
+          shift: [1.4kx + 10, -15]
+
+      magnet_top:
+        what: magnet_hole
+        where:
+          ref: matrix_inner_home
+          shift: [1.4kx, 15]
+
+      magnet_bottom_mirror:
+        what: magnet_hole
+        where:
+          ref: mirror_matrix_inner_home
+          shift: [1.4kx + 10, -15]
+
+      magnet_top_mirror:
+        what: magnet_hole
+        where:
+          ref: mirror_matrix_inner_home
+          shift: [1.4kx, 15]
