@@ -181,6 +181,16 @@ pcbs:
         where:
           ref: matrix_pinky_top
           shift: [-0.2kx, 0.8ky]
+      battery_power_mcu_text:
+        what: text
+        where:
+          ref: matrix_pinky_top
+          shift: [-0.2kx+1.5, 0.8ky]
+        params:
+          layer: F.SilkS
+          text: "BAT+"
+          justify: "left"
+
       battery_power_mcu_mirror:
         what: thru_hole_pad
         params:
@@ -188,6 +198,15 @@ pcbs:
         where:
           ref: mirror_matrix_pinky_top
           shift: [-0.2kx, 0.8ky]
+      battery_power_mcu_text_mirror:
+        what: text
+        where:
+          ref: mirror_matrix_pinky_top
+          shift: [-0.2kx+1.5, 0.8ky]
+        params:
+          layer: F.SilkS
+          text: "BAT+"
+          justify: "right"
 
       battery_power:
         what: thru_hole_pad
@@ -196,6 +215,16 @@ pcbs:
         where:
           ref: matrix_middle_bottom
           shift: [-0.3kx, -1.4-0.9ky]
+      battery_power_text:
+        what: text
+        where:
+          ref: matrix_middle_bottom
+          shift: [-0.3kx+1.5, -1.4-0.9ky]
+        params:
+          layer: F.SilkS
+          text: "BAT+"
+          justify: "left"
+
       battery_power_mirror:
         what: thru_hole_pad
         params:
@@ -203,6 +232,15 @@ pcbs:
         where:
           ref: mirror_matrix_middle_bottom
           shift: [-0.3kx, -1.4-0.9ky]
+      battery_power_text_mirror:
+        what: text
+        where:
+          ref: mirror_matrix_middle_bottom
+          shift: [-0.3kx+1.5, -1.4-0.9ky]
+        params:
+          layer: F.SilkS
+          text: "BAT+"
+          justify: "right"
 
       battery_power_gnd:
         what: thru_hole_pad
@@ -211,6 +249,16 @@ pcbs:
         where:
           ref: matrix_middle_bottom
           shift: [-0.3kx, 1.4-0.9ky]
+      battery_power_gnd_text:
+        what: text
+        where:
+          ref: matrix_middle_bottom
+          shift: [-0.3kx+1.5, 1.4-0.9ky]
+        params:
+          layer: F.SilkS
+          text: "BAT-"
+          justify: "left"
+
       battery_power_gnd_mirror:
         what: thru_hole_pad
         params:
@@ -218,6 +266,15 @@ pcbs:
         where:
           ref: mirror_matrix_middle_bottom
           shift: [-0.3kx, 1.4-0.9ky]
+      battery_power_gnd_text_mirror:
+        what: text
+        where:
+          ref: mirror_matrix_middle_bottom
+          shift: [-0.3kx+1.5, 1.4-0.9ky]
+        params:
+          layer: F.SilkS
+          text: "BAT-"
+          justify: "right"
 
       power_gnd:
         what: thru_hole_pad
@@ -226,6 +283,16 @@ pcbs:
         where:
           ref: thumbs_gamma_cluster
           shift: [0.8kx + 10 - 2, -1.4]
+      power_gnd_text:
+        what: text
+        where:
+          ref: thumbs_gamma_cluster
+          shift: [0.8kx + 6, -1.4]
+        params:
+          layer: B.SilkS
+          text: "GND"
+          justify: "left mirror"
+
       power_gnd_mirror:
         what: thru_hole_pad
         params:
@@ -233,6 +300,15 @@ pcbs:
         where:
           ref: mirror_thumbs_gamma_cluster
           shift: [0.8kx + 10 - 2, -1.4]
+      power_gnd_text_mirror:
+        what: text
+        where:
+          ref: mirror_thumbs_gamma_cluster
+          shift: [0.8kx + 6, -1.4]
+        params:
+          layer: B.SilkS
+          text: "GND"
+          justify: "right mirror"
 
       power_vcc:
         what: thru_hole_pad
@@ -241,6 +317,15 @@ pcbs:
         where:
           ref: thumbs_gamma_cluster
           shift: [0.8kx + 10 - 2, 1.4]
+      power_vcc_text:
+        what: text
+        where:
+          ref: thumbs_gamma_cluster
+          shift: [0.8kx + 6, 1.4]
+        params:
+          layer: B.SilkS
+          text: "+5V"
+          justify: "left mirror"
 
       power_vcc_mirror:
         what: thru_hole_pad
@@ -249,6 +334,15 @@ pcbs:
         where:
           ref: mirror_thumbs_gamma_cluster
           shift: [0.8kx + 10 - 2, 1.4]
+      power_vcc_text_mirror:
+        what: text
+        where:
+          ref: mirror_thumbs_gamma_cluster
+          shift: [0.8kx + 6, 1.4]
+        params:
+          layer: B.SilkS
+          text: "+5V"
+          justify: "right mirror"
 
       mcu:
         what: xiao_nrf52840
@@ -381,3 +475,24 @@ pcbs:
         where:
           ref: mirror_matrix_inner_home
           shift: [1.5kx, 15]
+
+      # Name
+      project_name:
+        what: text
+        where:
+          ref: matrix_ring_top
+          shift: [-0.5kx, 0.8ky]
+        params:
+          layer: F.SilkS
+          text: "crabapplepad v1.0\\nby @kumekay 2023\\nleft side"
+          justify: "left"
+
+      project_name_mirror:
+        what: text
+        where:
+          ref: mirror_matrix_ring_top
+          shift: [-0.5kx, 0.8ky]
+        params:
+          layer: F.SilkS
+          text: "crabapplepad v1.0\\nby @kumekay 2023\\nright side"
+          justify: "right"
