@@ -1,15 +1,14 @@
 module.exports = {
-    nets: {
-        net: undefined
-    },
-    params: {
-        class: 'MAGNET',
-        diameter: 12.3,
-        mountDiameter: 2.2,
-    },
-    body: p => {
-        const mainHoleRadius = p.diameter / 2 + p.mountDiameter;
-        return `
+  nets: {
+    net: undefined
+  },
+  params: {
+    class: 'MAGNET',
+    diameter: 12.3,
+  },
+  body: p => {
+    const mainHoleRadius = p.diameter / 2 + p.mountDiameter;
+    return `
         (module "Magnet_Hole_${p.diameter}mm" (layer "F.Cu")
           ${p.at /* parametric position */}
 
@@ -19,5 +18,5 @@ module.exports = {
 
           (pad "1" thru_hole circle locked (at 0 0) (size ${p.diameter + 1} ${p.diameter + 1}) (drill ${p.diameter}) (layers *.Cu *.Mask))
         )`
-    }
+  }
 }

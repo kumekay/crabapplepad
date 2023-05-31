@@ -102,11 +102,11 @@ outlines:
         - ref: matrix_index_top
           shift: [-0.5kx+po, 0.5ky+po]
         - ref: matrix_inner_top
-          shift: [1.25kx+po, 0.5ky+po]
+          shift: [1.55kx-po, 0.5ky+po]
         - ref: matrix_inner_top
-          shift: [1.25kx+po, 0.7ky+2po]
+          shift: [1.55kx-po, 0.7ky+2po]
         - ref: matrix_inner_top
-          shift: [1.5kx+po, 0.7ky+2po]
+          shift: [1.55kx+po, 0.7ky+2po]
         # magnet top
         - ref: matrix_inner_home
           shift: [2kx, 15]
@@ -129,11 +129,11 @@ outlines:
         - ref: mirror_matrix_index_top
           shift: [-0.5kx+po, 0.5ky+po]
         - ref: mirror_matrix_inner_top
-          shift: [1.25kx+po, 0.5ky+po]
+          shift: [1.55kx-po, 0.5ky+po]
         - ref: mirror_matrix_inner_top
-          shift: [1.25kx+po, 0.7ky+2po]
+          shift: [1.55kx-po, 0.7ky+2po]
         - ref: mirror_matrix_inner_top
-          shift: [1.5kx+po, .7ky+2po]
+          shift: [1.55kx+po, 0.7ky+2po]
         # magnet top
         - ref: mirror_matrix_inner_home
           shift: [2kx, 15]
