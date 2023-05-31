@@ -1,14 +1,14 @@
 units:
   # Keycap
-  krx: 16.5
-  kry: 16.5
-  p: 1.27
-  po: 1.6
+  krx: 16.5 # Keycap raw width
+  kry: 16.5 # Keycap raw height
+  p: 1.27 # Offset between keycaps
+  po: 1.6 # Offset between keycaps and outline
   # Keycap
-  kx: krx + p
-  ky: kry + p
-  mr: 6.1
-  sr: 1.6
+  kx: krx + p # Keycap width
+  ky: kry + p # Keycap height
+  sd: 2.2 # Screw diameter
+
 points:
   zones:
     matrix:
@@ -117,7 +117,7 @@ outlines:
           shift: [0.8kx + 10, -0.5ky-2po]
         - ref: matrix_outer_bottom
           shift: [-0.5kx-po, -0.5ky-2po]
-      fillet: sr
+      fillet: po
   _main_mirror:
     - what: polygon
       operation: stack
@@ -144,7 +144,7 @@ outlines:
           shift: [0.8kx + 10, -0.5ky-2po]
         - ref: mirror_matrix_outer_bottom
           shift: [-0.5kx-po, -0.5ky-2po]
-      fillet: sr
+      fillet: po
   board:
     - name: _main
     - name: _main_mirror
@@ -278,18 +278,34 @@ pcbs:
           shift: [0.6kx, 0.8ky-1+17.78]
           rotate: 90
 
-      mount_hole_thumb:
+      mount_hole_inner_bottom:
         what: mounthole
         params:
-          diameter: 3.2
+          diameter: sd
         where:
-          ref: matrix_inner_home
-          shift: [1.4kx + 5, 0]
+          ref: matrix_inner_bottom
+          shift: [1kx, 0]
+
+      mount_hole_inner_top:
+        what: mounthole
+        params:
+          diameter: sd
+        where:
+          ref: matrix_inner_top
+          shift: [0.8kx, 0]
+
+      mount_hole_thumb_bottom:
+        what: mounthole
+        params:
+          diameter: sd
+        where:
+          ref: thumbs_gamma_cluster
+          shift: [0.8kx, -0.3ky]
 
       mount_hole_pinky:
         what: mounthole
         params:
-          diameter: 3.2
+          diameter: sd
         where:
           ref: matrix_pinky_top
           shift: [0kx, 1.25ky]
@@ -297,23 +313,39 @@ pcbs:
       mount_hole_middle:
         what: mounthole
         params:
-          diameter: 3.2
+          diameter: sd
         where:
           ref: matrix_middle_bottom
           shift: [0.2kx, -0.75ky]
 
-      mount_hole_thumb_mirror:
+      mount_hole_inner_bottom_mirror:
         what: mounthole
         params:
-          diameter: 3.2
+          diameter: sd
         where:
-          ref: mirror_matrix_inner_home
-          shift: [1.4kx + 5, 0]
+          ref: mirror_matrix_inner_bottom
+          shift: [1kx, 0]
+
+      mount_hole_inner_top_mirror:
+        what: mounthole
+        params:
+          diameter: sd
+        where:
+          ref: mirror_matrix_inner_top
+          shift: [0.8kx, 0]
+
+      mount_hole_thumb_bottom_mirror:
+        what: mounthole
+        params:
+          diameter: sd
+        where:
+          ref: mirror_thumbs_gamma_cluster
+          shift: [0.8kx, -0.3ky]
 
       mount_hole_pinky_mirror:
         what: mounthole
         params:
-          diameter: 3.2
+          diameter: sd
         where:
           ref: mirror_matrix_pinky_top
           shift: [0kx, 1.25ky]
@@ -321,7 +353,7 @@ pcbs:
       mount_hole_middle_mirror:
         what: mounthole
         params:
-          diameter: 3.2
+          diameter: sd
         where:
           ref: mirror_matrix_middle_bottom
           shift: [0.2kx, -0.75ky]
@@ -330,22 +362,22 @@ pcbs:
         what: magnet_hole
         where:
           ref: matrix_inner_home
-          shift: [1.4kx + 10, -15]
+          shift: [1.5kx + 10, -15]
 
       magnet_top:
         what: magnet_hole
         where:
           ref: matrix_inner_home
-          shift: [1.4kx, 15]
+          shift: [1.5kx, 15]
 
       magnet_bottom_mirror:
         what: magnet_hole
         where:
           ref: mirror_matrix_inner_home
-          shift: [1.4kx + 10, -15]
+          shift: [1.5kx + 10, -15]
 
       magnet_top_mirror:
         what: magnet_hole
         where:
           ref: mirror_matrix_inner_home
-          shift: [1.4kx, 15]
+          shift: [1.5kx, 15]
