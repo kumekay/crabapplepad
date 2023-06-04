@@ -1,8 +1,6 @@
 module.exports = {
-  nets: {
-    net: undefined
-  },
   params: {
+    net: undefined,
     class: 'MAGNET',
     diameter: 12.3,
   },
@@ -16,7 +14,7 @@ module.exports = {
             (effects (font (size 1 1) (thickness 0.15)))
           )
 
-          (pad "1" thru_hole circle locked (at 0 0) (size ${p.diameter + 1} ${p.diameter + 1}) (drill ${p.diameter}) (layers *.Cu *.Mask))
+          (pad "1" thru_hole circle locked (at 0 0) (size ${p.diameter + 1} ${p.diameter + 1}) (drill ${p.diameter}) (layers *.Cu *.Mask)  ${p.net ? p.net.str : ''})
         )`
   }
 }

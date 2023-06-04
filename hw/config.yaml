@@ -83,8 +83,8 @@ points:
 
   rotate: -0
   mirror: &mirror
-    ref: thumbs_gamma_cluster
-    distance: 3kx+2p+2
+    ref: matrix_inner_home
+    distance: 4kx+20+2
 outlines:
   _keys:
     - what: rectangle
@@ -145,9 +145,22 @@ outlines:
         - ref: mirror_matrix_outer_bottom
           shift: [-0.5kx-po, -0.5ky-2po]
       fillet: po
+  _join:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: matrix_inner_home
+          shift: [2kx+10, -18]
+        - ref: matrix_inner_home
+          shift: [2kx+10, -44]
+        - ref: mirror_matrix_inner_home
+          shift: [2kx+10, -44]
+        - ref: mirror_matrix_inner_home
+          shift: [2kx+10, -18]
   board:
     - name: _main
     - name: _main_mirror
+    - name: _join
   combo:
     - name: board
     - operation: subtract
@@ -171,8 +184,15 @@ pcbs:
           from: "{{colrow}}"
           to: "{{row_net}}"
         adjust:
-          shift: [0, 6]
+          shift: [0, -5]
           rotate: 180
+      via:
+        what: via
+        where: true
+        params:
+          net: GND
+        adjust:
+          shift: [0, 3]
 
       battery_power_mcu:
         what: thru_hole_pad
@@ -262,7 +282,7 @@ pcbs:
       battery_power_gnd_mirror:
         what: thru_hole_pad
         params:
-          net: GND_mirror
+          net: GND
         where:
           ref: mirror_matrix_middle_bottom
           shift: [-0.3kx, 1.4-0.9ky]
@@ -296,7 +316,7 @@ pcbs:
       power_gnd_mirror:
         what: thru_hole_pad
         params:
-          net: GND_mirror
+          net: GND
         where:
           ref: mirror_thumbs_gamma_cluster
           shift: [0.8kx + 10 - 2, -1.4]
@@ -330,7 +350,7 @@ pcbs:
       power_vcc_mirror:
         what: thru_hole_pad
         params:
-          net: RAW_mirror
+          net: RAW
         where:
           ref: mirror_thumbs_gamma_cluster
           shift: [0.8kx + 10 - 2, 1.4]
@@ -348,7 +368,7 @@ pcbs:
         what: xiao_nrf52840
         where:
           ref: matrix_outer_top
-          shift: [0.6kx, 0.8ky-1]
+          shift: [0.6kx, 0.8ky - 2]
           rotate: 90
       mcu_mirror:
         what: xiao_nrf52840
@@ -365,11 +385,11 @@ pcbs:
           P9: P9_mirror
           P10: P10_mirror
           VCC: VCC_mirror
-          RAW: RAW_mirror
-          GND: GND_mirror
+          RAW: RAW
+          GND: GND
         where:
           ref: mirror_matrix_outer_top
-          shift: [0.6kx, 0.8ky-1+17.78]
+          shift: [0.6kx, 0.8ky-2+17.78]
           rotate: 90
 
       mount_hole_inner_bottom:
@@ -454,24 +474,32 @@ pcbs:
 
       magnet_bottom:
         what: magnet_hole
+        params:
+          net: GND
         where:
           ref: matrix_inner_home
           shift: [1.5kx + 10, -15]
 
       magnet_top:
         what: magnet_hole
+        params:
+          net: GND
         where:
           ref: matrix_inner_home
           shift: [1.5kx, 15]
 
       magnet_bottom_mirror:
         what: magnet_hole
+        params:
+          net: GND
         where:
           ref: mirror_matrix_inner_home
           shift: [1.5kx + 10, -15]
 
       magnet_top_mirror:
         what: magnet_hole
+        params:
+          net: GND
         where:
           ref: mirror_matrix_inner_home
           shift: [1.5kx, 15]
@@ -485,7 +513,7 @@ pcbs:
         params:
           layer: F.SilkS
           text: "crabapplepad v1.0\\nby @kumekay 2023\\nleft side"
-          justify: "left"
+          justify: left
 
       project_name_mirror:
         what: text
@@ -495,4 +523,13 @@ pcbs:
         params:
           layer: F.SilkS
           text: "crabapplepad v1.0\\nby @kumekay 2023\\nright side"
-          justify: "right"
+          justify: right
+
+      jlcpcd_order_id:
+        what: text
+        where:
+          ref: matrix_ring_bottom
+          shift: [0, -0.9ky]
+        params:
+          text: "JLCJLCJLCJLC"
+          justify: left
