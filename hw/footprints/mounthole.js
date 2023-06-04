@@ -14,16 +14,16 @@ module.exports = {
       pads += `(pad "1" thru_hole circle locked (at ${x} ${y}) (size 0.7 0.7) (drill 0.4) (layers *.Cu *.Mask))\n`;
     }
     return `
-        (module "Mount_Hole_${p.diameter}mm_Pad_Via" (layer "F.Cu")
-          ${p.at /* parametric position */}
+      (module "Mount_Hole_${p.diameter}mm_Pad_Via" (layer "F.Cu")
+        ${p.at /* parametric position */}
 
-          (fp_text reference "${p.ref}" (at 0 ${-p.diameter - 1}) (layer "F.SilkS") ${p.ref_hide}
-            (effects (font (size 1 1) (thickness 0.15)))
-          )
+        (fp_text reference "${p.ref}" (at 0 ${-p.diameter - 1}) (layer "F.SilkS") ${p.ref_hide}
+          (effects (font (size 1 1) (thickness 0.15)))
+        )
 
-          (fp_circle (center 0 0) (end ${p.diameter + 0.3} 0) (layer "F.CrtYd") (width 0.05) (fill none))
-          (pad "1" thru_hole circle locked (at 0 0) (size ${p.diameter * 2} ${p.diameter * 2}) (drill ${p.diameter}) (layers *.Cu *.Mask) ${p.net ? p.net.str : ''})
-          ${pads}
-        )`
+        (fp_circle (center 0 0) (end ${p.diameter + 0.3} 0) (layer "F.CrtYd") (width 0.05) (fill none))
+        (pad "1" thru_hole circle locked (at 0 0) (size ${p.diameter * 2} ${p.diameter * 2}) (drill ${p.diameter}) (layers *.Cu *.Mask) ${p.net ? p.net.str : ''})
+        ${pads}
+      )`
   }
 }
