@@ -535,22 +535,22 @@ pcbs:
           justify: left
 
       # Breakers
-      mouse_bite_top:
-        what: hole_array
-        params:
-          x_count: 2
-          x_spacing: 2
-          y_count: 17
-        where:
-          ref: matrix_inner_home
-          shift: [2kx+10, -18]
+      # mouse_bite_top:
+      #   what: hole_array
+      #   params:
+      #     x_count: 2
+      #     x_spacing: 2
+      #     y_count: 17
+      #   where:
+      #     ref: matrix_inner_home
+      #     shift: [2kx+10, -18]
 
-      mouse_bite_bottom:
-        what: hole_array
-        params:
-          x_count: 2
-          x_spacing: 2
-          y_count: 8
-        where:
-          ref: matrix_inner_home
-          shift: [2kx+10, -37]
+      # mouse_bite_bottom:
+      #   what: hole_array
+      #   params:
+      #     x_count: 2
+      #     x_spacing: 2
+      #     y_count: 8
+      #   where:
+      #     ref: matrix_inner_home
+      #     shift: [2kx+10, -37]
