@@ -14,6 +14,7 @@ Wireless minimalistic slim foldable split keyboard
 - 42 keys (I use Cyrillic layout too and 36 keys is not enough)
 - Apple Magic Trackpad can be magnetically attached
 
+
 ![folded](./images/folded.jpeg)
 ![with phone](./images/phone.jpeg)
 
@@ -38,6 +39,7 @@ The firmware is based on [ZMK](https://zmkfirmware.dev/) and [Myrioku Layout](ht
 - [ZMK Shield for the keyboard](https://github.com/kumekay/crabapplepad_shield)
 - [Myrioku Fork with the configs](https://github.com/kumekay/miryoku_zmk)
 
-```
-
-```
+## Links
+- [Blog post](https://kumekay.com/crabapplepad/)
+- [Reddit discussion](https://www.reddit.com/r/ErgoMechKeyboards/comments/1765qsz/crabapplepad_wireless_minimalistic_slim_foldable/)
+- [YouTube Video](https://www.youtube.com/watch?v=okey72G1r_E)
