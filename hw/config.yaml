@@ -1,12 +1,13 @@
 units:
   # Keycap
-  krx: 16.5 # Keycap raw width
-  kry: 16.5 # Keycap raw height
-  p: 1.27 # Offset between keycaps
+  krx: 18 # Keycap raw width
+  kry: 18 # Keycap raw height
   po: 1.6 # Offset between keycaps and outline
-  # Keycap
-  kx: krx + p # Keycap width
-  ky: kry + p # Keycap height
+
+  # Keycap spacing
+  kx: 19
+  ky: 19
+
   sd: 2.2 # Screw diameter
 
 points:
@@ -20,42 +21,42 @@ points:
       columns:
         outer:
           key:
-            column_net: P0
-            mirror.column_net: P0_mirror
+            column_net: P031
+            mirror.column_net: P017
         pinky:
           key:
             splay: 0
-            column_net: P1
-            mirror.column_net: P1_mirror
+            column_net: P029
+            mirror.column_net: P020
         ring:
           key:
             stagger: 0.7ky
-            column_net: P2
-            mirror.column_net: P2_mirror
+            column_net: P002
+            mirror.column_net: P022
         middle:
           key:
             stagger: 0.5ky
-            column_net: P3
-            mirror.column_net: P3_mirror
+            column_net: P115
+            mirror.column_net: P024
         index:
           key:
             stagger: -0.2ky
-            column_net: P4
-            mirror.column_net: P4_mirror
+            column_net: P113
+            mirror.column_net: P100
         inner:
           key:
-            column_net: P5
-            mirror.column_net: P5_mirror
+            column_net: P111
+            mirror.column_net: P011
       rows:
         bottom:
-          row_net: P9
-          mirror.row_net: P9_mirror
+          row_net: P104
+          mirror.row_net: P104
         home:
-          row_net: P8
-          mirror.row_net: P8_mirror
+          row_net: P106
+          mirror.row_net: P106
         top:
-          row_net: P7
-          mirror.row_net: P7_mirror
+          row_net: P010
+          mirror.row_net: P010
     thumbs:
       key:
         padding: 1ky
@@ -66,22 +67,22 @@ points:
       columns:
         alpha:
           key:
-            column_net: P3
-            mirror.column_net: P3_mirror
+            column_net: P115
+            mirror.column_net: P024
         beta:
           key:
-            column_net: P4
-            mirror.column_net: P4_mirror
+            column_net: P113
+            mirror.column_net: P100
         gamma:
           key:
-            column_net: P5
-            mirror.column_net: P5_mirror
+            column_net: P111
+            mirror.column_net: P011
       rows:
         cluster:
-          row_net: P6
-          mirror.row_net: P6_mirror
+          row_net: P009
+          mirror.row_net: P009
 
-  rotate: -0
+  rotate: -19.2
   mirror: &mirror
     ref: matrix_inner_home
     distance: 4kx+20+2
@@ -97,74 +98,51 @@ outlines:
       points:
         - ref: matrix_outer_top
           shift: [-0.5kx-po, 1.7ky+2po]
-        - ref: matrix_index_top
-          shift: [-0.5kx+po, 0.7ky+2po]
-        - ref: matrix_index_top
-          shift: [-0.5kx+po, 0.5ky+po]
-        - ref: matrix_inner_top
-          shift: [1.55kx-po, 0.5ky+po]
         - ref: matrix_inner_top
           shift: [1.55kx-po, 0.7ky+2po]
         - ref: matrix_inner_top
           shift: [1.55kx+po, 0.7ky+2po]
-        # magnet top
-        - ref: matrix_inner_home
-          shift: [2kx, 15]
-        # magnet bottom
-        - ref: matrix_inner_home
-          shift: [2kx + 10, -15]
         - ref: thumbs_gamma_cluster
           shift: [0.8kx + 10, -0.5ky-2po]
         - ref: matrix_outer_bottom
           shift: [-0.5kx-po, -0.5ky-2po]
-      fillet: po
+      # fillet: po
   _main_mirror:
     - what: polygon
       operation: stack
       points:
         - ref: mirror_matrix_outer_top
           shift: [-0.5kx-po, 1.7ky+2po]
-        - ref: mirror_matrix_index_top
-          shift: [-0.5kx+po, 0.7ky+2po]
-        - ref: mirror_matrix_index_top
-          shift: [-0.5kx+po, 0.5ky+po]
-        - ref: mirror_matrix_inner_top
-          shift: [1.55kx-po, 0.5ky+po]
         - ref: mirror_matrix_inner_top
           shift: [1.55kx-po, 0.7ky+2po]
         - ref: mirror_matrix_inner_top
           shift: [1.55kx+po, 0.7ky+2po]
-        # magnet top
-        - ref: mirror_matrix_inner_home
-          shift: [2kx, 15]
-        # magnet bottom
-        - ref: mirror_matrix_inner_home
-          shift: [2kx + 10, -15]
         - ref: mirror_thumbs_gamma_cluster
           shift: [0.8kx + 10, -0.5ky-2po]
         - ref: mirror_matrix_outer_bottom
           shift: [-0.5kx-po, -0.5ky-2po]
-      fillet: po
+      # fillet: po
   _join:
     - what: polygon
       operation: stack
       points:
-        - ref: matrix_inner_home
-          shift: [2kx+10, -18]
-        - ref: matrix_inner_home
-          shift: [2kx+10, -44]
-        - ref: mirror_matrix_inner_home
-          shift: [2kx+10, -44]
-        - ref: mirror_matrix_inner_home
-          shift: [2kx+10, -18]
+        - ref: matrix_inner_top
+          shift: [1.55kx+po, 0.7ky+2po]
+        - ref: mirror_matrix_inner_top
+          shift: [1.55kx+po, 0.7ky+2po]
+        - ref: mirror_thumbs_gamma_cluster
+          shift: [0.8kx + 10, -0.5ky-2po]
+        - ref: thumbs_gamma_cluster
+          shift: [0.8kx + 10, -0.5ky-2po]
+
   board:
     - name: _main
     - name: _main_mirror
     - name: _join
-  combo:
-    - name: board
-    - operation: subtract
-      name: _keys
+  # combo:
+  #   - name: board
+  #   - operation: subtract
+  #     name: _keys
 pcbs:
   kbd:
     outlines:
@@ -172,7 +150,7 @@ pcbs:
         outline: board
     footprints:
       keys:
-        what: kailh_x
+        what: mx_choc
         where: true
         params:
           from: "{{column_net}}"
@@ -183,80 +161,37 @@ pcbs:
         params:
           from: "{{colrow}}"
           to: "{{row_net}}"
+          side: "F"
         adjust:
-          shift: [0, -5]
-          rotate: 180
-      via:
-        what: via
-        where: true
-        params:
-          net: GND
-        adjust:
-          shift: [0, 3]
+          shift: [kx/2, ky/2-2]
+          rotate: -90
 
-      battery_power_mcu:
-        what: thru_hole_pad
-        params:
-          net: BAT_VCC
+      # via:
+      #   what: via
+      #   where: true
+      #   params:
+      #     net: GND
+      #   adjust:
+      #     shift: [0, 3]
+      mcu:
+        what: promicro_nrf
         where:
-          ref: matrix_pinky_top
-          shift: [-0.2kx, 0.8ky]
-      battery_power_mcu_text:
-        what: text
-        where:
-          ref: matrix_pinky_top
-          shift: [-0.2kx+1.5, 0.8ky]
-        params:
-          layer: F.SilkS
-          text: "BAT+"
-          justify: "left"
-
-      battery_power_mcu_mirror:
-        what: thru_hole_pad
-        params:
-          net: BAT_VCC_MIRROR
-        where:
-          ref: mirror_matrix_pinky_top
-          shift: [-0.2kx, 0.8ky]
-      battery_power_mcu_text_mirror:
-        what: text
-        where:
-          ref: mirror_matrix_pinky_top
-          shift: [-0.2kx+1.5, 0.8ky]
-        params:
-          layer: F.SilkS
-          text: "BAT+"
-          justify: "right"
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [0, -20]
+          rotate: -90
 
       battery_power:
         what: thru_hole_pad
         params:
           net: BAT_VCC
         where:
-          ref: matrix_middle_bottom
-          shift: [-0.3kx, -1.4-0.9ky]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-2, -40]
       battery_power_text:
         what: text
         where:
-          ref: matrix_middle_bottom
-          shift: [-0.3kx+1.5, -1.4-0.9ky]
-        params:
-          layer: F.SilkS
-          text: "BAT+"
-          justify: "left"
-
-      battery_power_mirror:
-        what: thru_hole_pad
-        params:
-          net: BAT_VCC_MIRROR
-        where:
-          ref: mirror_matrix_middle_bottom
-          shift: [-0.3kx, -1.4-0.9ky]
-      battery_power_text_mirror:
-        what: text
-        where:
-          ref: mirror_matrix_middle_bottom
-          shift: [-0.3kx+1.5, -1.4-0.9ky]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-3.5, -40]
         params:
           layer: F.SilkS
           text: "BAT+"
@@ -267,34 +202,17 @@ pcbs:
         params:
           net: GND
         where:
-          ref: matrix_middle_bottom
-          shift: [-0.3kx, 1.4-0.9ky]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [2, -40]
       battery_power_gnd_text:
         what: text
         where:
-          ref: matrix_middle_bottom
-          shift: [-0.3kx+1.5, 1.4-0.9ky]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [3.5, -40]
         params:
           layer: F.SilkS
           text: "BAT-"
           justify: "left"
-
-      battery_power_gnd_mirror:
-        what: thru_hole_pad
-        params:
-          net: GND
-        where:
-          ref: mirror_matrix_middle_bottom
-          shift: [-0.3kx, 1.4-0.9ky]
-      battery_power_gnd_text_mirror:
-        what: text
-        where:
-          ref: mirror_matrix_middle_bottom
-          shift: [-0.3kx+1.5, 1.4-0.9ky]
-        params:
-          layer: F.SilkS
-          text: "BAT-"
-          justify: "right"
 
       power_gnd:
         what: thru_hole_pad
@@ -363,34 +281,6 @@ pcbs:
           layer: B.SilkS
           text: "+5V"
           justify: "right mirror"
-
-      mcu:
-        what: xiao_nrf52840
-        where:
-          ref: matrix_outer_top
-          shift: [0.6kx, 0.8ky - 2]
-          rotate: 90
-      mcu_mirror:
-        what: xiao_nrf52840
-        params:
-          P0: P0_mirror
-          P1: P1_mirror
-          P2: P2_mirror
-          P3: P3_mirror
-          P4: P4_mirror
-          P5: P5_mirror
-          P6: P6_mirror
-          P7: P7_mirror
-          P8: P8_mirror
-          P9: P9_mirror
-          P10: P10_mirror
-          VCC: VCC_mirror
-          RAW: RAW
-          GND: GND
-        where:
-          ref: mirror_matrix_outer_top
-          shift: [0.6kx, 0.8ky-2+17.78]
-          rotate: 90
 
       mount_hole_inner_bottom:
         what: mounthole
@@ -472,38 +362,6 @@ pcbs:
           ref: mirror_matrix_middle_bottom
           shift: [0.2kx, -0.75ky]
 
-      magnet_bottom:
-        what: magnet_hole
-        params:
-          net: GND
-        where:
-          ref: matrix_inner_home
-          shift: [1.5kx + 10, -15]
-
-      magnet_top:
-        what: magnet_hole
-        params:
-          net: GND
-        where:
-          ref: matrix_inner_home
-          shift: [1.5kx, 15]
-
-      magnet_bottom_mirror:
-        what: magnet_hole
-        params:
-          net: GND
-        where:
-          ref: mirror_matrix_inner_home
-          shift: [1.5kx + 10, -15]
-
-      magnet_top_mirror:
-        what: magnet_hole
-        params:
-          net: GND
-        where:
-          ref: mirror_matrix_inner_home
-          shift: [1.5kx, 15]
-
       # Name
       project_name:
         what: text
@@ -512,7 +370,7 @@ pcbs:
           shift: [-0.5kx, 0.8ky]
         params:
           layer: F.SilkS
-          text: "crabapplepad v1.0\\nby @kumekay 2023\\nleft side"
+          text: "crabapplepad v2.0\\nby @kumekay 2024\\nleft side"
           justify: left
 
       project_name_mirror:
@@ -522,7 +380,7 @@ pcbs:
           shift: [-0.5kx, 0.8ky]
         params:
           layer: F.SilkS
-          text: "crabapplepad v1.0\\nby @kumekay 2023\\nright side"
+          text: "crabapplepad v2.0\\nby @kumekay 2024\\nright side"
           justify: right
 
       jlcpcd_order_id:

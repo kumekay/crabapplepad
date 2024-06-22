@@ -8,9 +8,9 @@ Wireless minimalistic slim foldable split keyboard
 
 - Foldable. The keyboard can be folded and put in a pocket
 - Minimalistic. No LEDs, no RGB, no extra keys
-- Thin. Uses Kailh X switches. 2cm thick in the folded state
+- With Kailh  Choc it's 3cm thick in the folded state
 - Split. The two halves are connected with a 3d printed hinge
-- Wireless. Uses Seeed Studio XIAO nRF52840 with BLE
+- Wireless. Uses Nice!Nano or ProMicro nRF52840 with BLE
 - 42 keys (I use Cyrillic layout too and 36 keys is not enough)
 - Apple Magic Trackpad can be magnetically attached
 
@@ -26,10 +26,6 @@ To regenerate the PCB run:
 ```bash
 npx ergogen hw --clean && open output/pcbs/kbd.kicad_pcb
 ```
-
-## The case
-
-The case is designed in Fusion 360. The files are in the `case` folder.
 
 ## Firmware
 
