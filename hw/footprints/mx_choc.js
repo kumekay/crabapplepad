@@ -4,10 +4,35 @@
 module.exports = {
   params: {
     designator: 'S',
+    conn_pad: true,
     from: undefined,
     to: undefined
   },
-  body: p => `
+  body: p => {
+    let connections = !p.conn_pad ? "" : `
+      (pad "1" smd custom (at -3.251475 -0.022159 ${p.r}) (size 0.381 0.381) (layers "F.Cu" "F.Paste" "F.Mask")
+      (options (clearance outline) (anchor circle))
+      (primitives
+        (gr_arc (start -0.130234 -1.174804) (mid 0 0) (end -0.333676 1.133924) (width 0.5))
+        (gr_line (start -0.333676 1.133924) (end -1.748555 3.822143) (width 0.5))
+        (gr_line (start -0.558525 -2.517841) (end -0.130234 -1.174804) (width 0.5))
+      )
+      ${p.from.str}
+      (uuid "0d1fb4ee-f613-4d1f-84cf-17d1d9b9fe03")
+    )
+
+      (pad "2" smd custom (at 3.374367 -0.010282 ${p.r}) (size 0.381 0.381) (layers "F.Cu" "F.Paste" "F.Mask")
+      (options (clearance outline) (anchor circle))
+      (primitives
+        (gr_arc (start -0.006705 -1.077393) (mid 0 0) (end -0.374367 1.010282) (width 0.5))
+        (gr_line (start -0.374367 1.010282) (end -3.296325 5.935869) (width 0.5))
+        (gr_line (start -0.756325 -5.044131) (end -0.006705 -1.077393) (width 0.5))
+      )
+      ${p.to.str}
+      (uuid "9aaf8afd-e4b1-4690-b910-54126c755d51")
+    )`
+
+    return `
 (footprint "SW_Cherry_MX_Choc_PCB_1.00u" (version 20240108) (generator "pcbnew") (generator_version "8.0")
   ${p.at}
   (layer "F.Cu")
@@ -92,5 +117,7 @@ module.exports = {
   ${p.to.str}
 (uuid "c204a136-7128-4c85-a66f-281343334e03")
   )
+  ${connections}
 )`
+  }
 }
