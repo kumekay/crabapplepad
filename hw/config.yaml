@@ -1,3 +1,10 @@
+meta:
+  engine: 4.1.0
+  name: crabapplepad
+  version: 2.0
+  author: kumekay
+  url: https://github.com/kumekay/crabapplepad/tree/v2
+
 units:
   # Keycap
   krx: 18 # Keycap raw width
@@ -10,6 +17,9 @@ units:
 
   sd: 2.2 # Screw diameter
   ps: 2.54 # Pin spacing
+
+  # MCU
+  pos: -20 - 7.5ps # Hole offset from bottom pin
 
 points:
   zones:
@@ -84,69 +94,97 @@ points:
           row_net: P009
           mirror.row_net: P009
 
-  rotate: -19.2
+  rotate: -22
   mirror: &mirror
     ref: matrix_inner_home
-    distance: 60 + 2po
+    distance: 74 + 2po
 outlines:
   _keys:
     - what: rectangle
       where: true
       size: [krx, kry]
 
-  _main:
+  board:
     - what: polygon
-      operation: stack
+      operation: add
+      fillet: po
       points:
         - ref: matrix_outer_top
-          shift: [-0.5kx-po, 1.7ky+2po]
+          shift: [-0.5kx-po, 0.5ky+1po]
+        - ref: matrix_middle_top
+          shift: [-0.5kx-po, 0.5ky+2po]
         - ref: matrix_inner_top
-          shift: [1.55kx-po, 0.7ky+2po]
-        - ref: matrix_inner_top
-          shift: [1.55kx+po, 0.7ky+2po]
-        - ref: thumbs_gamma_cluster
-          shift: [0.8kx + 10, -0.5ky-2po]
-        - ref: matrix_outer_bottom
-          shift: [-0.5kx-po, -0.5ky-2po]
-      # fillet: po
-  _main_mirror:
-    - what: polygon
-      operation: stack
-      points:
+          shift: [0.5kx+po, 0.7ky+2po]
+        - ref: mirror_matrix_inner_top
+          shift: [0.5kx+po, 0.7ky+2po]
+        - ref: mirror_matrix_middle_top
+          shift: [-0.5kx-po, 0.5ky+2po]
         - ref: mirror_matrix_outer_top
-          shift: [-0.5kx-po, 1.7ky+2po]
-        - ref: mirror_matrix_inner_top
-          shift: [1.55kx-po, 0.7ky+2po]
-        - ref: mirror_matrix_inner_top
-          shift: [1.55kx+po, 0.7ky+2po]
-        - ref: mirror_thumbs_gamma_cluster
-          shift: [0.8kx + 10, -0.5ky-2po]
+          shift: [-0.5kx-po, 0.5ky+1po]
         - ref: mirror_matrix_outer_bottom
           shift: [-0.5kx-po, -0.5ky-2po]
-      # fillet: po
-  _join:
-    - what: polygon
-      operation: stack
-      points:
-        - ref: matrix_inner_top
-          shift: [1.55kx+po, 0.7ky+2po]
-        - ref: mirror_matrix_inner_top
-          shift: [1.55kx+po, 0.7ky+2po]
         - ref: mirror_thumbs_gamma_cluster
-          shift: [0.8kx + 10, -0.5ky-2po]
+          shift: [0.5kx + po, -0.5ky-2po]
         - ref: thumbs_gamma_cluster
-          shift: [0.8kx + 10, -0.5ky-2po]
+          shift: [0.5kx + po, -0.5ky-2po]
+        - ref: matrix_outer_bottom
+          shift: [-0.5kx-po, -0.5ky-2po]
 
-  board:
-    - name: _main
-    - name: _main_mirror
-    - name: _join
+    - what: rectangle
+      operation: subtract
+      where:
+        ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+        shift: [0, ps]
+      size: [14, 8]
+      fillet: po
+
+    - what: rectangle
+      operation: subtract
+      where:
+        ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+        shift: [-15, -10]
+      size: [2, 16]
+      fillet: .8
+
+    - what: rectangle
+      operation: subtract
+      where:
+        ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+        shift: [15, -10]
+      size: [2, 16]
+      fillet: .8
+
+    - what: rectangle
+      operation: subtract
+      where:
+        ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+        shift: [-15, -56]
+      size: [2, 30]
+      fillet: .8
+
+    - what: rectangle
+      operation: subtract
+      where:
+        ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+        shift: [15, -56]
+      size: [2, 30]
+      fillet: .8
+
+    - what: rectangle
+      operation: subtract
+      where:
+        ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+        shift: [0, -90]
+      size: [32, 30]
+      fillet: po
+
   # combo:
   #   - name: board
   #   - operation: subtract
   #     name: _keys
 pcbs:
   kbd:
+    template: kicad8
     outlines:
       main:
         outline: board
@@ -170,7 +208,7 @@ pcbs:
           to: "{{row_net}}"
           side: "F"
         adjust:
-          shift: [kx/2, ky/2-3]
+          shift: [kx/2+0.3, ky/2-3]
           rotate: -90
 
       diode_mirror:
@@ -184,7 +222,7 @@ pcbs:
           to: "{{row_net}}"
           side: "F"
         adjust:
-          shift: [kx/2, ky/2-3]
+          shift: [kx/2+0.3, ky/2-3]
           rotate: 90
 
       # via:
@@ -201,6 +239,7 @@ pcbs:
           shift: [0, -20]
           rotate: -90
 
+      # Left side keys
       col_outer:
         what: thru_hole_pad
         params:
@@ -281,18 +320,265 @@ pcbs:
           ref: thumbs_gamma_cluster
           shift: [-0.5kx, 0.6ky + po]
 
+      # Left side PCB
+
+      col_outer_pcb:
+        what: thru_hole_pad
+        params:
+          net: P031
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-11, pos + 9ps]
+
+      col_pinky_pcb:
+        what: thru_hole_pad
+        params:
+          net: P029
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-11, pos + 8ps]
+
+      col_ring_pcb:
+        what: thru_hole_pad
+        params:
+          net: P002
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-11, pos + 7ps]
+
+      col_middle_pcb:
+        what: thru_hole_pad
+        params:
+          net: P115
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-11, pos + 6ps]
+
+      col_index_pcb:
+        what: thru_hole_pad
+        params:
+          net: P113
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-11, pos + 5ps]
+
+      col_inner_pcb:
+        what: thru_hole_pad
+        params:
+          net: P111
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-11, pos + 4ps]
+
+      row_top_pcb:
+        what: thru_hole_pad
+        params:
+          net: P010
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-11, pos + 3ps]
+
+      row_home_pcb:
+        what: thru_hole_pad
+        params:
+          net: P106
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-11, pos + 2ps]
+
+      row_bottom_pcb:
+        what: thru_hole_pad
+        params:
+          net: P104
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-11, pos + ps]
+
+      row_thumbs_pcb:
+        what: thru_hole_pad
+        params:
+          net: P009
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-11, pos]
+
+      # Right side keys
+      mirror_col_outer:
+        what: thru_hole_pad
+        params:
+          net: P017
+        where:
+          ref: mirror_thumbs_gamma_cluster
+          shift: [-0.5kx, 0.6ky + po + 9ps]
+
+      mirror_col_pinky:
+        what: thru_hole_pad
+        params:
+          net: P020
+        where:
+          ref: mirror_thumbs_gamma_cluster
+          shift: [-0.5kx, 0.6ky + po + 8ps]
+
+      mirror_col_ring:
+        what: thru_hole_pad
+        params:
+          net: P022
+        where:
+          ref: mirror_thumbs_gamma_cluster
+          shift: [-0.5kx, 0.6ky + po + 7ps]
+
+      mirror_col_middle:
+        what: thru_hole_pad
+        params:
+          net: P024
+        where:
+          ref: mirror_thumbs_gamma_cluster
+          shift: [-0.5kx, 0.6ky + po + 6ps]
+
+      mirror_col_index:
+        what: thru_hole_pad
+        params:
+          net: P100
+        where:
+          ref: mirror_thumbs_gamma_cluster
+          shift: [-0.5kx, 0.6ky + po + 5ps]
+
+      mirror_col_inner:
+        what: thru_hole_pad
+        params:
+          net: P011
+        where:
+          ref: mirror_thumbs_gamma_cluster
+          shift: [-0.5kx, 0.6ky + po + 4ps]
+
+      mirror_row_top:
+        what: thru_hole_pad
+        params:
+          net: P010
+        where:
+          ref: mirror_thumbs_gamma_cluster
+          shift: [-0.5kx, 0.6ky + po + 3ps]
+
+      mirror_row_home:
+        what: thru_hole_pad
+        params:
+          net: P106
+        where:
+          ref: mirror_thumbs_gamma_cluster
+          shift: [-0.5kx, 0.6ky + po + 2ps]
+
+      mirror_row_bottom:
+        what: thru_hole_pad
+        params:
+          net: P104
+        where:
+          ref: mirror_thumbs_gamma_cluster
+          shift: [-0.5kx, 0.6ky + po + 1ps]
+
+      mirror_row_thumbs:
+        what: thru_hole_pad
+        params:
+          net: P009
+        where:
+          ref: mirror_thumbs_gamma_cluster
+          shift: [-0.5kx, 0.6ky + po]
+
+      # Left side PCB
+
+      mirror_col_outer_pcb:
+        what: thru_hole_pad
+        params:
+          net: P017
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [11, pos + 9ps]
+
+      mirror_col_pinky_pcb:
+        what: thru_hole_pad
+        params:
+          net: P020
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [11, pos + 8ps]
+
+      mirror_col_ring_pcb:
+        what: thru_hole_pad
+        params:
+          net: P022
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [11, pos + 7ps]
+
+      mirror_col_middle_pcb:
+        what: thru_hole_pad
+        params:
+          net: P024
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [11, pos + 6ps]
+
+      mirror_col_index_pcb:
+        what: thru_hole_pad
+        params:
+          net: P100
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [11, pos + 5ps]
+
+      mirror_col_inner_pcb:
+        what: thru_hole_pad
+        params:
+          net: P011
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [11, pos + 4ps]
+
+      mirror_row_top_pcb:
+        what: thru_hole_pad
+        params:
+          net: P010
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [11, pos + 3ps]
+
+      mirror_row_home_pcb:
+        what: thru_hole_pad
+        params:
+          net: P106
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [11, pos + 2ps]
+
+      mirror_row_bottom_pcb:
+        what: thru_hole_pad
+        params:
+          net: P104
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [11, pos + ps]
+
+      mirror_row_thumbs_pcb:
+        what: thru_hole_pad
+        params:
+          net: P009
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [11, pos]
+
+      # Misc
+
       battery_power:
         what: thru_hole_pad
         params:
           net: BAT_VCC
         where:
           ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
-          shift: [-2, -40]
+          shift: [-2, -38]
       battery_power_text:
         what: text
         where:
           ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
-          shift: [-3.5, -40]
+          shift: [-3.5, -38]
         params:
           layer: F.SilkS
           text: "BAT+"
@@ -304,12 +590,12 @@ pcbs:
           net: GND
         where:
           ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
-          shift: [2, -40]
+          shift: [2, -38]
       battery_power_gnd_text:
         what: text
         where:
           ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
-          shift: [3.5, -40]
+          shift: [3.5, -38]
         params:
           layer: F.SilkS
           text: "BAT-"
@@ -323,13 +609,21 @@ pcbs:
           ref: matrix_inner_bottom
           shift: [1kx, 0]
 
-      mount_hole_inner_top:
+      mount_hole_mcu_left:
         what: mounthole
         params:
           diameter: sd
         where:
-          ref: matrix_inner_top
-          shift: [0.8kx, 0]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-10.5, 1]
+
+      mount_hole_mcu_right:
+        what: mounthole
+        params:
+          diameter: sd
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [10.5, 1]
 
       mount_hole_thumb_bottom:
         what: mounthole
@@ -363,14 +657,6 @@ pcbs:
           ref: mirror_matrix_inner_bottom
           shift: [1kx, 0]
 
-      mount_hole_inner_top_mirror:
-        what: mounthole
-        params:
-          diameter: sd
-        where:
-          ref: mirror_matrix_inner_top
-          shift: [0.8kx, 0]
-
       mount_hole_thumb_bottom_mirror:
         what: mounthole
         params:
@@ -399,49 +685,28 @@ pcbs:
       project_name:
         what: text
         where:
-          ref: matrix_ring_top
-          shift: [-0.5kx, 0.8ky]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-7, -44]
         params:
           layer: F.SilkS
-          text: "crabapplepad v2.0\\nby @kumekay 2024\\nleft side"
+          text: "crabapplepad v2.0"
           justify: left
 
-      project_name_mirror:
+      project_author:
         what: text
         where:
-          ref: mirror_matrix_ring_top
-          shift: [-0.5kx, 0.8ky]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-7.3, -46]
         params:
           layer: F.SilkS
-          text: "crabapplepad v2.0\\nby @kumekay 2024\\nright side"
-          justify: right
+          text: "by @kumekay 2024"
+          justify: left
 
       jlcpcd_order_id:
         what: text
         where:
-          ref: matrix_ring_bottom
-          shift: [0, -0.9ky]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-5, -60]
         params:
           text: "JLCJLCJLCJLC"
           justify: left
-
-      # Breakers
-      # mouse_bite_top:
-      #   what: hole_array
-      #   params:
-      #     x_count: 2
-      #     x_spacing: 2
-      #     y_count: 17
-      #   where:
-      #     ref: matrix_inner_home
-      #     shift: [2kx+10, -18]
-
-      # mouse_bite_bottom:
-      #   what: hole_array
-      #   params:
-      #     x_count: 2
-      #     x_spacing: 2
-      #     y_count: 8
-      #   where:
-      #     ref: matrix_inner_home
-      #     shift: [2kx+10, -37]

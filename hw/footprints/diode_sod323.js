@@ -11,14 +11,11 @@ module.exports = {
     (descr "SOD-323")
     (tags "SOD-323")
     (attr smd)
-    (fp_text reference "${p.ref}" (at 0 1.85) (layer "${p.side}.SilkS") ${p.ref_hide}
-        (effects (font (size 1 1) (thickness 0.15)) (justify mirror))
+    (fp_text reference "${p.ref}" (at 0 1.85 ${p.rot}) (layer "${p.side}.SilkS") ${p.ref_hide}
+        (effects (font (size 1 1) (thickness 0.15)) (justify ${p.side == 'B' ? 'mirror' : ''}))
     )
-    (fp_text value "" (at 0.1 -1.9) (layer "${p.side}.Fab")
-        (effects (font (size 1 1) (thickness 0.15)) (justify mirror))
-    )
-    (fp_text user "\${REFERENCE}" (at 0 1.85) (layer "${p.side}.Fab")
-        (effects (font (size 1 1) (thickness 0.15)) (justify mirror))
+    (fp_text user "\${REFERENCE}" (at 0 1.85 ${p.rot}) (layer "${p.side}.Fab")
+        (effects (font (size 1 1) (thickness 0.15)) (justify  ${p.side == 'B' ? 'mirror' : ''}))
     )
     (fp_line (start -2.01 -0.85) (end 1.25 -0.85)
     (stroke (width 0.12) (type solid)) (layer "${p.side}.SilkS"))
