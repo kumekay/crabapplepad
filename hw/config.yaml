@@ -601,13 +601,8 @@ pcbs:
           text: "BAT-"
           justify: "left"
 
-      mount_hole_inner_bottom:
-        what: mounthole
-        params:
-          diameter: sd
-        where:
-          ref: matrix_inner_bottom
-          shift: [1kx, 0]
+      # Mount holes
+      # MCU
 
       mount_hole_mcu_left:
         what: mounthole
@@ -625,13 +620,37 @@ pcbs:
           ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
           shift: [10.5, 1]
 
+      mount_hole_mcu_left_bottom:
+        what: mounthole
+        params:
+          diameter: sd
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-10.5, -71]
+
+      mount_hole_mcu_right_bottom:
+        what: mounthole
+        params:
+          diameter: sd
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [10.5, -71]
+
+      mount_hole_inner_top:
+        what: mounthole
+        params:
+          diameter: sd
+        where:
+          ref: matrix_inner_top
+          shift: [0.75kx, -0.25ky]
+
       mount_hole_thumb_bottom:
         what: mounthole
         params:
           diameter: sd
         where:
           ref: thumbs_gamma_cluster
-          shift: [0.8kx, -0.3ky]
+          shift: [0.75kx, -0.25ky]
 
       mount_hole_pinky:
         what: mounthole
@@ -639,7 +658,7 @@ pcbs:
           diameter: sd
         where:
           ref: matrix_pinky_top
-          shift: [0kx, 1.25ky]
+          shift: [0.25kx, 0.75ky]
 
       mount_hole_middle:
         what: mounthole
@@ -647,15 +666,15 @@ pcbs:
           diameter: sd
         where:
           ref: matrix_middle_bottom
-          shift: [0.2kx, -0.75ky]
+          shift: [-0.25kx, -0.75ky]
 
-      mount_hole_inner_bottom_mirror:
+      mount_hole_inner_top_mirror:
         what: mounthole
         params:
           diameter: sd
         where:
-          ref: mirror_matrix_inner_bottom
-          shift: [1kx, 0]
+          ref: mirror_matrix_inner_top
+          shift: [0.75kx, -0.25ky]
 
       mount_hole_thumb_bottom_mirror:
         what: mounthole
@@ -663,7 +682,7 @@ pcbs:
           diameter: sd
         where:
           ref: mirror_thumbs_gamma_cluster
-          shift: [0.8kx, -0.3ky]
+          shift: [0.75kx, -0.25ky]
 
       mount_hole_pinky_mirror:
         what: mounthole
@@ -671,7 +690,7 @@ pcbs:
           diameter: sd
         where:
           ref: mirror_matrix_pinky_top
-          shift: [0kx, 1.25ky]
+          shift: [0.25kx, 0.75ky]
 
       mount_hole_middle_mirror:
         what: mounthole
@@ -679,7 +698,7 @@ pcbs:
           diameter: sd
         where:
           ref: mirror_matrix_middle_bottom
-          shift: [0.2kx, -0.75ky]
+          shift: [-0.25kx, -0.75ky]
 
       # Name
       project_name:
