@@ -134,7 +134,8 @@ _notes
 output
 .DS_Store
 
-
+# Kicad Files
+*.kicad_pcb.lck
 kbd-backups
 
 .tool-versions

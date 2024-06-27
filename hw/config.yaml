@@ -184,10 +184,11 @@ outlines:
       size: [32, 30]
       fillet: po
 
-  # combo:
-  #   - name: board
-  #   - operation: subtract
-  #     name: _keys
+  combo:
+    - name: board
+    - operation: subtract
+      name: _keys
+
 pcbs:
   kbd:
     template: kicad8
