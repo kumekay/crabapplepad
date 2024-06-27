@@ -1,7 +1,6 @@
 module.exports = {
   params: {
-    net: '',
-    class: 'HOLE',
+    net: { type: 'net', value: 'GND' },
     diameter: 2.2,
   },
   body: p => {
@@ -22,7 +21,7 @@ module.exports = {
         )
 
         (fp_circle (center 0 0) (end ${p.diameter + 0.3} 0) (layer "F.CrtYd") (width 0.05) (fill none))
-        (pad "1" thru_hole circle locked (at 0 0) (size ${p.diameter * 2} ${p.diameter * 2}) (drill ${p.diameter}) (layers *.Cu *.Mask) ${p.net ? p.net.str : ''})
+        (pad "1" thru_hole circle locked (at 0 0) (size ${p.diameter * 2} ${p.diameter * 2}) (drill ${p.diameter}) (layers *.Cu *.Mask) ${p.net})
         ${pads}
       )`
   }

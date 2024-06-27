@@ -3,10 +3,16 @@ module.exports = {
         designator: 'D',
         from: undefined,
         to: undefined,
-        side: 'B'
+        side: 'B',
+        handSoldering: true
     },
-    body: p => `
-    (footprint "Diode_SMD:D_SOD-323_HandSoldering" (layer "${p.side}.Cu")
+    body: p => {
+
+        let padAt = p.handSoldering ? '1.25' : '1.05'
+        let padSize = p.handSoldering ? '1 1' : '0.6 0.45'
+
+        return `
+    (footprint "Diode_SMD:D_SOD-323${p.handSoldering ? '_HandSoldering' : ''}" (layer "${p.side}.Cu")
     ${p.at}
     (descr "SOD-323")
     (tags "SOD-323")
@@ -51,11 +57,12 @@ module.exports = {
     (stroke (width 0.1) (type solid)) (layer "${p.side}.Fab"))
     (fp_line (start 0.9 0.7) (end 0.9 -0.7)
     (stroke (width 0.1) (type solid)) (layer "${p.side}.Fab"))
-    (pad "1" smd roundrect (at -1.25 0 ${p.rot}) (size 1 1) (layers "${p.side}.Cu" "${p.side}.Paste" "${p.side}.Mask") (roundrect_rratio 0.25) ${p.to.str})
-    (pad "2" smd roundrect (at 1.25 0 ${p.rot}) (size 1 1) (layers "${p.side}.Cu" "${p.side}.Paste" "${p.side}.Mask") (roundrect_rratio 0.25) ${p.from.str})
+    (pad "1" smd roundrect (at -${padAt} 0 ${p.rot}) (size ${padSize}) (layers "${p.side}.Cu" "${p.side}.Paste" "${p.side}.Mask") (roundrect_rratio 0.25) ${p.to.str})
+    (pad "2" smd roundrect (at ${padAt} 0 ${p.rot}) (size ${padSize}) (layers "${p.side}.Cu" "${p.side}.Paste" "${p.side}.Mask") (roundrect_rratio 0.25) ${p.from.str})
     (model "\${KICAD6_3DMODEL_DIR}/Diode_SMD.3dshapes/D_SOD-323.wrl"
     ))
 `
+    }
 }
 
 

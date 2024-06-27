@@ -130,6 +130,7 @@ outlines:
         - ref: matrix_outer_bottom
           shift: [-0.5kx-po, -0.5ky-2po]
 
+    # USB cutout
     - what: rectangle
       operation: subtract
       where:
@@ -138,6 +139,7 @@ outlines:
       size: [14, 8]
       fillet: po
 
+    # Left top cutout
     - what: rectangle
       operation: subtract
       where:
@@ -146,6 +148,7 @@ outlines:
       size: [2, 16]
       fillet: .8
 
+    # Right top cutout
     - what: rectangle
       operation: subtract
       where:
@@ -154,22 +157,25 @@ outlines:
       size: [2, 16]
       fillet: .8
 
+    # Left bottom cutout
     - what: rectangle
       operation: subtract
       where:
         ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
-        shift: [-15, -56]
-      size: [2, 30]
+        shift: [-15, -58]
+      size: [2, 29]
       fillet: .8
 
+    # Right bottom cutout
     - what: rectangle
       operation: subtract
       where:
         ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
-        shift: [15, -56]
-      size: [2, 30]
+        shift: [15, -58]
+      size: [2, 29]
       fillet: .8
 
+    # Bottom cutout
     - what: rectangle
       operation: subtract
       where:
@@ -207,6 +213,7 @@ pcbs:
           from: "{{colrow}}"
           to: "{{row_net}}"
           side: "F"
+          handSoldering: false
         adjust:
           shift: [kx/2+0.3, ky/2-3]
           rotate: -90
@@ -221,17 +228,19 @@ pcbs:
           from: "{{colrow}}"
           to: "{{row_net}}"
           side: "F"
+          handSoldering: false
         adjust:
           shift: [kx/2+0.3, ky/2-3]
           rotate: 90
 
-      # via:
-      #   what: via
-      #   where: true
-      #   params:
-      #     net: GND
-      #   adjust:
-      #     shift: [0, 3]
+      via:
+        what: via
+        where: true
+        params:
+          net: GND
+        adjust:
+          shift: [-0.4kx, -0.4ky]
+
       mcu:
         what: promicro_nrf
         where:
@@ -600,6 +609,16 @@ pcbs:
           layer: F.SilkS
           text: "BAT-"
           justify: "left"
+
+      power_switch:
+        what: power_switch_smd_side
+        params:
+          from: BAT_VCC
+          to: RAW
+        where:
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [0, -72.7]
+          rotate: -90
 
       # Mount holes
       # MCU
