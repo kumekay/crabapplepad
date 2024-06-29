@@ -19,7 +19,7 @@ units:
   ps: 2.54 # Pin spacing
 
   # MCU
-  pos: -20 - 7.5ps # Hole offset from bottom pin
+  pos: -20 - 8.7ps # Hole offset from bottom pin
 
 points:
   zones:
@@ -214,10 +214,21 @@ pcbs:
           from: "{{colrow}}"
           to: "{{row_net}}"
           side: "F"
-          handSoldering: false
+          handSoldering: true
         adjust:
-          shift: [kx/2+0.3, ky/2-3]
+          shift: [kx/2, 4]
           rotate: -90
+
+      via_diode:
+        what: via
+        where:
+          - /mirror_matrix_.*/
+          - /mirror_thumbs_.*/
+        asym: clone
+        params:
+          net: "{{row_net}}"
+        adjust:
+          shift: [kx/2, 7]
 
       diode_mirror:
         what: diode_sod323
@@ -229,10 +240,21 @@ pcbs:
           from: "{{colrow}}"
           to: "{{row_net}}"
           side: "F"
-          handSoldering: false
+          handSoldering: true
         adjust:
-          shift: [kx/2+0.3, ky/2-3]
+          shift: [kx/2, 4]
           rotate: 90
+
+      via_diode_mirror:
+        what: via
+        where:
+          - /mirror_matrix_.*/
+          - /mirror_thumbs_.*/
+        asym: source
+        params:
+          net: "{{row_net}}"
+        adjust:
+          shift: [kx/2, 7]
 
       via:
         what: via
@@ -240,7 +262,7 @@ pcbs:
         params:
           net: GND
         adjust:
-          shift: [-0.4kx, -0.4ky]
+          shift: [-0.4kx, 0.1ky]
 
       mcu:
         what: promicro_nrf
@@ -255,80 +277,80 @@ pcbs:
         params:
           net: P031
         where:
-          ref: thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po + 9ps]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-19, pos + 9ps]
 
       col_pinky:
         what: thru_hole_pad
         params:
           net: P029
         where:
-          ref: thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po + 8ps]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-19, pos + 8ps]
 
       col_ring:
         what: thru_hole_pad
         params:
           net: P002
         where:
-          ref: thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po + 7ps]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-19, pos + 7ps]
 
       col_middle:
         what: thru_hole_pad
         params:
           net: P115
         where:
-          ref: thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po + 6ps]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-19, pos + 6ps]
 
       col_index:
         what: thru_hole_pad
         params:
           net: P113
         where:
-          ref: thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po + 5ps]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-19, pos + 5ps]
 
       col_inner:
         what: thru_hole_pad
         params:
           net: P111
         where:
-          ref: thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po + 4ps]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-19, pos + 4ps]
 
       row_top:
         what: thru_hole_pad
         params:
           net: P010
         where:
-          ref: thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po + 3ps]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-19, pos + 3ps]
 
       row_home:
         what: thru_hole_pad
         params:
           net: P106
         where:
-          ref: thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po + 2ps]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-19, pos + 2ps]
 
       row_bottom:
         what: thru_hole_pad
         params:
           net: P104
         where:
-          ref: thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po + 1ps]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-19, pos + 1ps]
 
       row_thumbs:
         what: thru_hole_pad
         params:
           net: P009
         where:
-          ref: thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [-19, pos + 0ps]
 
       # Left side PCB
 
@@ -418,80 +440,80 @@ pcbs:
         params:
           net: P017
         where:
-          ref: mirror_thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po + 9ps]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [19, pos + 9ps]
 
       mirror_col_pinky:
         what: thru_hole_pad
         params:
           net: P020
         where:
-          ref: mirror_thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po + 8ps]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [19, pos + 8ps]
 
       mirror_col_ring:
         what: thru_hole_pad
         params:
           net: P022
         where:
-          ref: mirror_thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po + 7ps]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [19, pos + 7ps]
 
       mirror_col_middle:
         what: thru_hole_pad
         params:
           net: P024
         where:
-          ref: mirror_thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po + 6ps]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [19, pos + 6ps]
 
       mirror_col_index:
         what: thru_hole_pad
         params:
           net: P100
         where:
-          ref: mirror_thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po + 5ps]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [19, pos + 5ps]
 
       mirror_col_inner:
         what: thru_hole_pad
         params:
           net: P011
         where:
-          ref: mirror_thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po + 4ps]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [19, pos + 4ps]
 
       mirror_row_top:
         what: thru_hole_pad
         params:
           net: P010
         where:
-          ref: mirror_thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po + 3ps]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [19, pos + 3ps]
 
       mirror_row_home:
         what: thru_hole_pad
         params:
           net: P106
         where:
-          ref: mirror_thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po + 2ps]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [19, pos + 2ps]
 
       mirror_row_bottom:
         what: thru_hole_pad
         params:
           net: P104
         where:
-          ref: mirror_thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po + 1ps]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [19, pos + 1ps]
 
       mirror_row_thumbs:
         what: thru_hole_pad
         params:
           net: P009
         where:
-          ref: mirror_thumbs_gamma_cluster
-          shift: [-0.5kx, 0.6ky + po]
+          ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+          shift: [19, pos + 0ps]
 
       # Left side PCB
 
@@ -662,7 +684,7 @@ pcbs:
           diameter: sd
         where:
           ref: matrix_inner_top
-          shift: [0.75kx, -0.25ky]
+          shift: [0.25kx, 0.65ky]
 
       mount_hole_thumb_bottom:
         what: mounthole
@@ -694,7 +716,7 @@ pcbs:
           diameter: sd
         where:
           ref: mirror_matrix_inner_top
-          shift: [0.75kx, -0.25ky]
+          shift: [0.25kx, 0.65ky]
 
       mount_hole_thumb_bottom_mirror:
         what: mounthole
