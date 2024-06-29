@@ -136,6 +136,7 @@ output
 
 # Kicad Files
 *.kicad_pcb.lck
+_autosave-*.kicad_pcb
 kbd-backups
 
 .tool-versions
