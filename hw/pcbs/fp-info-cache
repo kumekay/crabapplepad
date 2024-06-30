@@ -1,4 +1,4 @@
-24520244868254446
+24527123869355050
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -92211,11 +92211,39 @@ rotary encoder illuminated switch vertical
 9
 8
 SW_MX_Choc
+D_SOD-323
+SOD-323
+SOD-323
+0
+2
+2
+SW_MX_Choc
+D_SOD-323_HandSoldering
+SOD-323
+SOD-323
+0
+2
+2
+SW_MX_Choc
+PAD-1mm
+
+
+0
+1
+1
+SW_MX_Choc
 SW_Cherry_MX_Choc_PCB_1.00u
 Cherry MX keyswitch PCB Mount Keycap 1.00u
 Cherry MX Keyboard Keyswitch Switch PCB Cutout Keycap 1.00u
 0
 7
+2
+SW_MX_Choc
+SW_Cherry_MX_Choc_PCB_1.00u_nosilk
+Cherry MX and Kailh Choc v1 keyswitch PCB Mount Keycap 1.00u
+Cherry MX Keyboard and Kailh Choc v1 Keyswitch Switch PCB Cutout Keycap 1.00u
+0
+6
 2
 Sensor
 ASAIR_AM2302_P2.54mm_Lead2.75mm_TabDown
