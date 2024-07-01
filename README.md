@@ -29,3 +29,7 @@ NB! The final PCB was heavily modified in KiCAD
 ## Firmware
 
 The firmware is based on [ZMK](https://zmkfirmware.dev/) and [Myrioku Layout](https://github.com/manna-harbour/miryoku) adapted for 42 keys. T
+
+## Where is the slim V1?
+
+It's in the [v1](https://github.com/kumekay/crabapplepad/tree/v1) branch. The V1 is ccm thick in the folded state with Kailh X switches. The V2 is 3cm thick with Kailh Choc switches.
