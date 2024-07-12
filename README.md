@@ -6,7 +6,8 @@ Wireless minimalistic foldable split keyboard
 
 ## Features
 
-- Foldable. The keyboard can be folded and put in a pocket
+- Supports Kailh Choc and MX switches
+- Optionally foldable with Choc switches
 - Minimalistic. No LEDs, no RGB, no extra keys
 - With Kailh Choc it's 3cm thick in the folded state
 - Split. The two halves are connected with a 3d printed hinge
@@ -16,12 +17,11 @@ Wireless minimalistic foldable split keyboard
 
 ## PCB design
 
-PCB is generated using [ergogen](https://github.com/ergogen/ergogen). Then it finished in KiCAD. The files are in the `hw` folder.
-
+PCB is generated using [ergogen](https://github.com/ergogen/ergogen). Then it finished in KiCAD.
 To regenerate the PCB run:
 
 ```bash
-npx ergogen hw --clean && open output/pcbs/kbd.kicad_pcb
+npx ergogen . --clean && open output/pcbs/kbd.kicad_pcb
 ```
 
 NB! The final PCB was heavily modified in KiCAD
