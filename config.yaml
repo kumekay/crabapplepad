@@ -182,7 +182,94 @@ outlines:
         ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
         shift: [0, -90]
       size: [32, 30]
-      fillet: po
+      fillet:
+        po
+
+        # Mount holes
+
+    - what: circle
+      operation: subtract
+      radius: 1.1
+      where:
+        ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+        shift: [-10.5, 1]
+
+    - what: circle
+      operation: subtract
+      radius: 1.1
+      where:
+        ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+        shift: [10.5, 1]
+
+    - what: circle
+      operation: subtract
+      radius: 1.1
+      where:
+        ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+        shift: [-10.5, -71]
+
+    - what: circle
+      operation: subtract
+      radius: 1.1
+      where:
+        ref.aggregate.parts: [matrix_index_top, mirror_matrix_index_top]
+        shift: [10.5, -71]
+
+    - what: circle
+      operation: subtract
+      radius: 1.1
+      where:
+        ref: matrix_inner_top
+        shift: [0.25kx, 0.65ky]
+
+    - what: circle
+      operation: subtract
+      radius: 1.1
+      where:
+        ref: thumbs_gamma_cluster
+        shift: [0.75kx, -0.25ky]
+
+    - what: circle
+      operation: subtract
+      radius: 1.1
+      where:
+        ref: matrix_pinky_top
+        shift: [0.25kx, 0.75ky]
+
+    - what: circle
+      operation: subtract
+      radius: 1.1
+      where:
+        ref: matrix_middle_bottom
+        shift: [-0.25kx, -0.75ky]
+
+    - what: circle
+      operation: subtract
+      radius: 1.1
+      where:
+        ref: mirror_matrix_inner_top
+        shift: [0.25kx, 0.65ky]
+
+    - what: circle
+      operation: subtract
+      radius: 1.1
+      where:
+        ref: mirror_thumbs_gamma_cluster
+        shift: [0.75kx, -0.25ky]
+
+    - what: circle
+      operation: subtract
+      radius: 1.1
+      where:
+        ref: mirror_matrix_pinky_top
+        shift: [0.25kx, 0.75ky]
+
+    - what: circle
+      operation: subtract
+      radius: 1.1
+      where:
+        ref: mirror_matrix_middle_bottom
+        shift: [-0.25kx, -0.75ky]
 
   combo:
     - name: board
