@@ -286,6 +286,16 @@ outlines:
       size: [14.1, 14.1]
       operation: subtract
 
+  key_holder_choc:
+    - what: rectangle
+      where: true
+      size: [krx+2, kry+2]
+      fillet: 2
+    - what: rectangle
+      where: true
+      size: [14, 14]
+      operation: subtract
+
 pcbs:
   kbd:
     template: kicad8
